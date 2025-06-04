@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fleuris - Your Garden of Unique Brands</title>
+  <link rel="manifest" href="manifest.json" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0fff4;
+      color: #444;
+    }
+    header {
+      background-color: #ffe0f0;
+      padding: 1rem;
+      text-align: center;
+      font-size: 1.5rem;
+      color: #d63384;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      background: #e0f8ec;
+      padding: 0.5rem;
+    }
+    section {
+      padding: 1rem;
+    }
+    .card {
+      border: 1px solid #ddd;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      background: #fff;
+    }
+    .story, .lookbook, .wishlist, .auction, .community, .points, .eco, .comment, .consult, .lang {
+      border: 2px dashed pink;
+      margin-top: 1rem;
+      padding: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>🌸 Fleuris: Your Garden of Unique Brands</header>
+  <nav>
+    <a href="login.html">Login</a>
+    <a href="signup.html">Signup</a>
+    <a href="lookbook.html">Lookbooks</a>
+    <a href="wishlist.html">Wishlist</a>
+    <a href="#">Cart</a>
+  </nav>
+  <section>
+    <div class="card"><strong>Outfit Idea Feed</strong> – Personalized suggestions...</div>
+    <div class="card auction">Auction Items Listing</div>
+    <div class="card community">Seller Community + Follow</div>
+    <div class="card points" id="points-display">0 pts | 0 coins | Level: Rosebud</div>
+    <div class="card wishlist">Wishlist – Notified on Sale</div>
+    <div class="card lookbook">Pinterest-style Lookbook</div>
+    <div class="card story">Seller Stories (video)</div>
+    <div class="card eco">Tagged: Handmade / Eco-Friendly / Recycled</div>
+    <div class="card comment">Styled by You – Upload photos</div>
+    <div class="card consult">Book Personal/Live Shopping</div>
+    <div class="card lang">🌐 Language Selector</div>
+  </section>
+  <script src="login.js"></script>
+  <script src="rewards.js"></script>
+</body>
+</html>

@@ -41,17 +41,42 @@
       margin-top: 1rem;
       padding: 1rem;
     }
+    #auth-section {
+      text-align: right;
+      padding: 0.5rem 1rem;
+      background-color: #f8f9fa;
+    }
+    #auth-section button {
+      background-color: #d4edda;
+      border: none;
+      padding: 6px 12px;
+      margin-right: 5px;
+      color: #155724;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    #user-email {
+      color: #444;
+      font-size: 0.9rem;
+    }
   </style>
 </head>
 <body>
   <header>🌸 Fleuris: Your Garden of Unique Brands</header>
+
+  <!-- Login/Signup Section -->
+  <div id="auth-section">
+    <button onclick="netlifyIdentity.open('login')">Login</button>
+    <button onclick="netlifyIdentity.open('signup')">Sign Up</button>
+    <span id="user-email"></span>
+  </div>
+
   <nav>
-    <a href="login.html">Login</a>
-    <a href="signup.html">Signup</a>
-    <a href="lookbook.html">Lookbooks</a>
-    <a href="wishlist.html">Wishlist</a>
+    <a href="#">Lookbooks</a>
+    <a href="#">Wishlist</a>
     <a href="#">Cart</a>
   </nav>
+
   <section>
     <div class="card"><strong>Outfit Idea Feed</strong> – Personalized suggestions...</div>
     <div class="card auction">Auction Items Listing</div>
@@ -65,6 +90,22 @@
     <div class="card consult">Book Personal/Live Shopping</div>
     <div class="card lang">🌐 Language Selector</div>
   </section>
+
+  <!-- Netlify Identity Widget -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script>
+    netlifyIdentity.init();
+
+    netlifyIdentity.on('login', user => {
+      document.getElementById('user-email').innerText = 'Logged in as: ' + user.email;
+      netlifyIdentity.close();
+    });
+
+    netlifyIdentity.on('logout', () => {
+      document.getElementById('user-email').innerText = '';
+    });
+  </script>
+
   <script src="login.js"></script>
   <script src="rewards.js"></script>
 </body>

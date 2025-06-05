@@ -1,11 +1,100 @@
 <!DOCTYPE html>
-<html>
-<head><title>Login - Fleuris</title></head>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fleuris Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff0f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 50px;
+    }
+    input {
+      margin: 10px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #d63384;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    #user-email {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
 <body>
-  <form id="login-form">
-    <input type="text" id="login-username" placeholder="Username" required />
-    <button type="submit">Login</button>
-  </form>
-  <script src="login.js"></script>
+
+  <h1>🌸 Fleuris Login</h1>
+
+  <input type="email" id="email" placeholder="Email" />
+  <input type="password" id="password" placeholder="Password" />
+  <button onclick="login()">Log In</button>
+
+  <p id="user-email"></p>
+  <p id="points-display">Loading points...</p>
+
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+    const supabase = createClient('https://ervcbdxtlzomgbbfwncl.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVydmNiZHh0bH-pvbWdiYmZ3bmNsIiwicm9sZSI6ImFub24iLCJp-YXQiOjE3NDkxMjI2NDMsImV4cCI6Mj-A2NDY5ODY0M30.rr2hpt4QtBK2US92bzYQqh-mIE65VIUpZsFpTbIVBt4w')
+
+    async function login() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password
+      });
+
+      if (error) {
+        alert("Login error: " + error.message);
+        return;
+      }
+
+      const user = data.user;
+      document.getElementById("user-email").innerText = 'Logged in as: ' + user.email;
+
+      // Check if profile exists
+      let { data: profile, error: fetchError } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', user.id)
+        .single();
+
+      // If it doesn't exist, create it
+      if (!profile) {
+        await supabase.from('profiles').insert({
+          id: user.id,
+          points: 0,
+          coins: 0,
+          level: 'Rosebud'
+        });
+        profile = { points: 0, coins: 0, level: 'Rosebud' };
+      }
+
+      updatePointsUI(profile);
+    }
+
+    function updatePointsUI(profile) {
+      const { points, coins, level } = profile;
+      document.getElementById('points-display').innerText =
+        `${points} pts | ${coins} coins | Level: ${level}`;
+    }
+
+    window.login = login;
+  </script>
+
 </body>
 </html>

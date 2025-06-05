@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Fleuris - Your Garden of Unique Brands</title>
   <link rel="manifest" href="manifest.json" />
   <style>
@@ -62,10 +62,10 @@
 <body>
   <header>🌸 Fleuris: Your Garden of Unique Brands</header>
 
-  <!-- Supabase Login/Signup -->
+  <!-- Netlify Identity Login/Signup -->
   <div id="auth-section">
-    <input type="email" id="email" placeholder="Email">
-    <input type="password" id="password" placeholder="Password">
+    <input type="email" id="email" placeholder="Email" />
+    <input type="password" id="password" placeholder="Password" />
     <button onclick="signup()">Sign Up</button>
     <button onclick="login()">Login</button>
     <button onclick="logout()">Logout</button>
@@ -92,46 +92,81 @@
     <div class="card lang">🌐 Language Selector</div>
   </section>
 
-  <!-- Supabase -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <!-- Netlify Identity Widget -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
-    // Replace these with your actual values from Supabase
-    const SUPABASE_URL = "https://ervcbdxtlzomgbbfwncl.supabase.co" ;
-    const SUPABASE_KEY = "process.env.SUPABASE_KEY
-const supabase = createClient(supabaseUrl, supabaseKey)" ;
+    // Initialize Netlify Identity
+    const netlifyIdentity = window.netlifyIdentity;
+    netlifyIdentity.init();
 
-    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    // Elements
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const userEmailSpan = document.getElementById('user-email');
 
-    async function signup() {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-      const { user, error } = await supabase.auth.signUp({ email, password });
-      if (error) {
-        alert("Signup error: " + error.message);
+    // Signup function
+    function signup() {
+      const email = emailInput.value;
+      const password = passwordInput.value;
+
+      netlifyIdentity.signup(email, password)
+        .then(user => {
+          alert('Signup successful! Please check your email to confirm.');
+          clearInputs();
+          updateUserUI();
+        })
+        .catch(err => alert('Signup error: ' + err.message));
+    }
+
+    // Login function
+    function login() {
+      const email = emailInput.value;
+      const password = passwordInput.value;
+
+      netlifyIdentity.login(email, password)
+        .then(user => {
+          alert('Login successful!');
+          clearInputs();
+          updateUserUI();
+        })
+        .catch(err => alert('Login error: ' + err.message));
+    }
+
+    // Logout function
+    function logout() {
+      netlifyIdentity.logout();
+      alert('Logged out!');
+      updateUserUI();
+    }
+
+    // Update UI based on user login state
+    function updateUserUI() {
+      const user = netlifyIdentity.currentUser();
+      if (user) {
+        userEmailSpan.textContent = `Logged in as: ${user.email}`;
       } else {
-        alert("Signup successful! Please check your email.");
+        userEmailSpan.textContent = '';
       }
     }
 
-    async function login() {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-      if (error) {
-        alert("Login error: " + error.message);
-      } else {
-        document.getElementById("user-email").innerText = 'Logged in as: ' + data.user.email;
-      }
+    // Clear input fields
+    function clearInputs() {
+      emailInput.value = '';
+      passwordInput.value = '';
     }
 
-    async function logout() {
-      const { error } = await supabase.auth.signOut();
-      if (error) {
-        alert("Logout error: " + error.message);
-      } else {
-        document.getElementById("user-email").innerText = '';
-      }
-    }
+    // Listen to login/logout events to update UI
+    netlifyIdentity.on('login', user => {
+      updateUserUI();
+      netlifyIdentity.close();
+    });
+
+    netlifyIdentity.on('logout', () => {
+      updateUserUI();
+    });
+
+    // On page load, update UI
+    updateUserUI();
   </script>
 
   <script src="login.js"></script>

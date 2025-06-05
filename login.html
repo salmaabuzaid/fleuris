@@ -18,18 +18,46 @@
       padding: 10px;
       border: 1px solid #ddd;
       border-radius: 4px;
+      width: 250px;
     }
     button {
       padding: 10px 20px;
+      margin-top: 10px;
       background-color: #d63384;
       color: white;
       border: none;
       border-radius: 4px;
       cursor: pointer;
+      width: 270px;
+    }
+    #google-login-btn {
+      background-color: #4285F4;
+      margin-top: 15px;
     }
     #user-email {
       margin-top: 20px;
       font-weight: bold;
+    }
+    #points-display {
+      margin-top: 10px;
+    }
+    #status {
+      margin-top: 20px;
+      padding: 10px;
+      border-radius: 6px;
+      width: 300px;
+      text-align: center;
+      display: none;
+    }
+    .success {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    .error {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
     }
   </style>
 </head>
@@ -40,18 +68,33 @@
   <input type="email" id="email" placeholder="Email" />
   <input type="password" id="password" placeholder="Password" />
   <button onclick="login()">Log In</button>
+  
+  <button id="google-login-btn" onclick="loginWithGoogle()">Log In with Google</button>
 
   <p id="user-email"></p>
   <p id="points-display">Loading points...</p>
+  
+  <div id="status"></div>
 
   <script type="module">
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 
-    const supabase = createClient('https://ervcbdxtlzomgbbfwncl.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVydmNiZHh0bH-pvbWdiYmZ3bmNsIiwicm9sZSI6ImFub24iLCJp-YXQiOjE3NDkxMjI2NDMsImV4cCI6Mj-A2NDY5ODY0M30.rr2hpt4QtBK2US92bzYQqh-mIE65VIUpZsFpTbIVBt4w')
+    const supabase = createClient('https://ervcbdxtlzomgbbfwncl.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVydmNiZHh0bH-pvbWdiYmZ3bmNsIiwicm9sZSI6ImFub24iLCJp-YXQiOjE3NDkxMjI2NDMsImV4cCI6Mj-A2NDY5ODY0M30.rr2hpt4QtBK2US92bzYQqh-mIE65VIUpZsFpTbIVBt4w
+
+
+    const statusDiv = document.getElementById("status");
+
+    function showMessage(message, type='success') {
+      statusDiv.innerText = message;
+      statusDiv.className = type;
+      statusDiv.style.display = "block";
+    }
 
     async function login() {
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
+
+      showMessage("Logging in...", "success");
 
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
@@ -59,12 +102,13 @@
       });
 
       if (error) {
-        alert("Login error: " + error.message);
+        showMessage("❌ Login error: " + error.message, "error");
         return;
       }
 
       const user = data.user;
       document.getElementById("user-email").innerText = 'Logged in as: ' + user.email;
+      showMessage("✅ Login successful!", "success");
 
       // Check if profile exists
       let { data: profile, error: fetchError } = await supabase
@@ -72,6 +116,11 @@
         .select('*')
         .eq('id', user.id)
         .single();
+
+      if (fetchError && fetchError.code !== 'PGRST116') { // Ignore 'no rows' error if any
+        showMessage("❌ Error fetching profile: " + fetchError.message, "error");
+        return;
+      }
 
       // If it doesn't exist, create it
       if (!profile) {
@@ -87,6 +136,18 @@
       updatePointsUI(profile);
     }
 
+    async function loginWithGoogle() {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google'
+      });
+
+      if (error) {
+        showMessage("❌ OAuth login error: " + error.message, "error");
+      } else {
+        showMessage("Redirecting to Google sign-in...", "success");
+      }
+    }
+
     function updatePointsUI(profile) {
       const { points, coins, level } = profile;
       document.getElementById('points-display').innerText =
@@ -94,6 +155,8 @@
     }
 
     window.login = login;
+    window.loginWithGoogle = loginWithGoogle;
+
   </script>
 
 </body>

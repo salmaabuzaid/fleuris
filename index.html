@@ -46,28 +46,29 @@
       padding: 0.5rem 1rem;
       background-color: #f8f9fa;
     }
-    #auth-section button {
-      background-color: #d4edda;
-      border: none;
-      padding: 6px 12px;
+    #auth-section input, #auth-section button {
+      padding: 6px;
       margin-right: 5px;
-      color: #155724;
       border-radius: 4px;
-      cursor: pointer;
+      border: 1px solid #ccc;
     }
     #user-email {
       color: #444;
       font-size: 0.9rem;
+      margin-left: 10px;
     }
   </style>
 </head>
 <body>
   <header>🌸 Fleuris: Your Garden of Unique Brands</header>
 
-  <!-- Login/Signup Section -->
+  <!-- Supabase Login/Signup -->
   <div id="auth-section">
-    <button onclick="netlifyIdentity.open('login')">Login</button>
-    <button onclick="netlifyIdentity.open('signup')">Sign Up</button>
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="signup()">Sign Up</button>
+    <button onclick="login()">Login</button>
+    <button onclick="logout()">Logout</button>
     <span id="user-email"></span>
   </div>
 
@@ -91,19 +92,46 @@
     <div class="card lang">🌐 Language Selector</div>
   </section>
 
-  <!-- Netlify Identity Widget -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <script>
-    netlifyIdentity.init();
+    // Replace these with your actual values from Supabase
+    const SUPABASE_URL = "https://ervcbdxtlzomgbbfwncl.supabase.co" ;
+    const SUPABASE_KEY = "process.env.SUPABASE_KEY
+const supabase = createClient(supabaseUrl, supabaseKey)" ;
 
-    netlifyIdentity.on('login', user => {
-      document.getElementById('user-email').innerText = 'Logged in as: ' + user.email;
-      netlifyIdentity.close();
-    });
+    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-    netlifyIdentity.on('logout', () => {
-      document.getElementById('user-email').innerText = '';
-    });
+    async function signup() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const { user, error } = await supabase.auth.signUp({ email, password });
+      if (error) {
+        alert("Signup error: " + error.message);
+      } else {
+        alert("Signup successful! Please check your email.");
+      }
+    }
+
+    async function login() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) {
+        alert("Login error: " + error.message);
+      } else {
+        document.getElementById("user-email").innerText = 'Logged in as: ' + data.user.email;
+      }
+    }
+
+    async function logout() {
+      const { error } = await supabase.auth.signOut();
+      if (error) {
+        alert("Logout error: " + error.message);
+      } else {
+        document.getElementById("user-email").innerText = '';
+      }
+    }
   </script>
 
   <script src="login.js"></script>

@@ -79,8 +79,7 @@
   <script type="module">
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 
-    const supabase = createClient('https://ervcbdxtlzomgbbfwncl.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVydmNiZHh0bH-pvbWdiYmZ3bmNsIiwicm9sZSI6ImFub24iLCJp-YXQiOjE3NDkxMjI2NDMsImV4cCI6Mj-A2NDY5ODY0M30.rr2hpt4QtBK2US92bzYQqh-mIE65VIUpZsFpTbIVBt4w
-
+    const supabase = createClient('https://your-supabase-url.supabase.co', 'your-public-anon-key');
 
     const statusDiv = document.getElementById("status");
 
@@ -130,34 +129,4 @@
           coins: 0,
           level: 'Rosebud'
         });
-        profile = { points: 0, coins: 0, level: 'Rosebud' };
-      }
-
-      updatePointsUI(profile);
-    }
-
-    async function loginWithGoogle() {
-      const { error } = await supabase.auth.signInWithOAuth({
-        provider: 'google'
-      });
-
-      if (error) {
-        showMessage("❌ OAuth login error: " + error.message, "error");
-      } else {
-        showMessage("Redirecting to Google sign-in...", "success");
-      }
-    }
-
-    function updatePointsUI(profile) {
-      const { points, coins, level } = profile;
-      document.getElementById('points-display').innerText =
-        `${points} pts | ${coins} coins | Level: ${level}`;
-    }
-
-    window.login = login;
-    window.loginWithGoogle = loginWithGoogle;
-
-  </script>
-
-</body>
-</html>
+        profile = { points: 0, coins: 0, level: 'Rose 

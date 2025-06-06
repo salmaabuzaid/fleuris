@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fleuris - Your Garden of Unique Brands</title>
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="manifest" href="manifest.json" />
+</head>
+<body>
+  <header>
+    <h1>Fleuris</h1>
+    <p>Your Garden of Unique Brands</p>
+    <nav>
+      <button id="login-btn">Login</button>
+      <button id="wishlist-btn">Wishlist <span id="wishlist-count">0</span></button>
+      <button id="coins-btn">Coins: <span id="coins-count">0</span></button>
+      <button id="lookbooks-btn">Lookbooks</button>
+      <button id="lang-btn">FR</button> <!-- language toggle -->
+      <button id="photo-search-btn">Search by Photo</button> <!-- photo search -->
+      <button id="auction-btn">Auctions</button> <!-- auctions -->
+      <button id="live-shopping-btn">Live Shopping</button> <!-- live shopping -->
+    </nav>
+  </header>
+
+  <section id="user-info" style="display:none;">
+    <p>Welcome, <span id="username-display"></span>! <button id="logout-btn">Logout</button></p>
+    <p>Your Badge: <span id="badge-display">Newbie</span></p>
+    <p>Your Level: <span id="level-display">Rosebud</span></p>
+  </section>
+
+  <main id="product-list">
+    <!-- Products loaded here -->
+  </main>
+
+  <!-- Login Modal -->
+  <div id="login-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Login / Signup</h2>
+      <input type="text" id="username-input" placeholder="Enter username" />
+      <button id="submit-login">Submit</button>
+      <button id="close-login">Close</button>
+    </div>
+  </div>
+
+  <!-- Wishlist Modal -->
+  <div id="wishlist-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Your Wishlist</h2>
+      <ul id="wishlist-items"></ul>
+      <button id="close-wishlist">Close</button>
+    </div>
+  </div>
+
+  <!-- Lookbooks Modal -->
+  <div id="lookbooks-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Your Lookbooks</h2>
+      <div id="lookbooks-list"></div>
+      <input type="text" id="new-lookbook-name" placeholder="New Lookbook Name" />
+      <button id="add-lookbook-btn">Add Lookbook</button>
+      <button id="close-lookbooks">Close</button>
+    </div>
+  </div>
+
+  <!-- Auction Modal -->
+  <div id="auction-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Live Auctions</h2>
+      <div id="auction-list"></div>
+      <button id="close-auction">Close</button>
+    </div>
+  </div>
+
+  <!-- Photo Search Modal -->
+  <div id="photo-search-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Search by Photo</h2>
+      <input type="file" id="photo-upload" accept="image/*" />
+      <button id="search-photo-btn">Search</button>
+      <button id="close-photo-search">Close</button>
+      <div id="photo-search-results"></div>
+    </div>
+  </div>
+
+  <!-- Live Shopping Modal -->
+  <div id="live-shopping-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Book Live Shopping or Consultation</h2>
+      <input type="datetime-local" id="live-shopping-date" />
+      <button id="book-live-btn">Book Now</button>
+      <button id="close-live-shopping">Close</button>
+      <div id="live-shopping-confirmation"></div>
+    </div>
+  </div>
+
+  <script src="scripts/phase3.js"></script>
+</body>
+</html>

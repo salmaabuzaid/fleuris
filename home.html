@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fleuris Home</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <header>
+    <h1>🌸 Fleuris</h1>
+    <nav>
+      <a href="#">Feed</a>
+      <a href="#">Lookbooks</a>
+      <a href="#">Consultations</a>
+      <a href="#">My Profile</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- AI Assistant -->
+    <section id="ai-assistant">
+      <h2>Ask Fleuris AI 🌼</h2>
+      <textarea placeholder="Ask for outfit ideas, budget picks, etc."></textarea>
+      <button>Ask</button>
+    </section>
+
+    <!-- Personalized Feed -->
+    <section id="personal-feed">
+      <h2>Just for You</h2>
+      <div class="scroll-feed">
+        <!-- Product cards will be inserted dynamically -->
+      </div>
+    </section>
+
+    <!-- Lookbooks -->
+    <section id="lookbooks">
+      <h2>Your Lookbooks</h2>
+      <button>Create New Lookbook</button>
+      <div class="lookbook-board"></div>
+    </section>
+
+    <!-- Seller Stories -->
+    <section id="seller-stories">
+      <h2>Stories from Sellers</h2>
+      <div class="stories-carousel">
+        <!-- Short vertical video previews -->
+      </div>
+    </section>
+
+    <!-- Auctions -->
+    <section id="auctions">
+      <h2>Auctions</h2>
+      <div class="auction-grid">
+        <!-- List active auction items -->
+      </div>
+    </section>
+
+    <!-- Buyer Rewards -->
+    <section id="rewards">
+      <h2>Your Level: 🌹 Rosebud</h2>
+      <p>You have 120 coins. Spend more to reach Blossom 🌸!</p>
+      <progress value="120" max="500"></progress>
+    </section>
+
+    <!-- Upload to Search -->
+    <section id="upload-search">
+      <h2>Search by Image</h2>
+      <input type="file" accept="image/*" />
+      <button>Search</button>
+    </section>
+
+    <!-- Waitlist -->
+    <section id="waitlist-products">
+      <h2>Waitlist Notifications</h2>
+      <p>You’ll be notified when saved items are back in stock.</p>
+    </section>
+
+    <!-- Bundle Discounts -->
+    <section id="bundles">
+      <h2>Bundle Discounts</h2>
+      <div class="bundle-list"></div>
+    </section>
+
+    <!-- Comment Style Uploads -->
+    <section id="buyer-style-gallery">
+      <h2>Styled by You ✨</h2>
+      <div class="style-gallery"></div>
+    </section>
+
+    <!-- Eco Filters -->
+    <section id="eco-friendly">
+      <h2>Eco-Friendly Picks</h2>
+      <div class="eco-tags">
+        <button>Handmade</button>
+        <button>Recycled</button>
+        <button>Eco-Friendly</button>
+      </div>
+    </section>
+
+    <!-- Wishlist Notifications -->
+    <section id="wishlist-alerts">
+      <h2>Wishlist Updates</h2>
+      <ul>
+        <li>💖 Bracelet Set is now 20% off!</li>
+        <li>🌿 Vintage Tote is back in stock!</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Fleuris</p>
+  </footer>
+
+  <script src="api.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

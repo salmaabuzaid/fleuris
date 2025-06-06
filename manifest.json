@@ -3,8 +3,8 @@
   "short_name": "Fleuris",
   "start_url": "index.html",
   "display": "standalone",
-  "background_color": "#d8f3dc",
-  "theme_color": "#52796f",
+  "background_color": "#e6f5e6",
+  "theme_color": "#a3d9a5",
   "icons": [
     {
       "src": "icons/icon-192.png",

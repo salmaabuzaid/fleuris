@@ -33,6 +33,9 @@ window.addEventListener('click', (e) => {
 // === Authentication Handling ===
 
 // Sign Up
+const signupForm = document.getElementById('signup-form');
+const signupError = document.getElementById('signup-error');
+
 signupForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   const email = document.getElementById('signup-email').value;
@@ -44,13 +47,16 @@ signupForm.addEventListener('submit', async (e) => {
     signupError.textContent = error.message;
   } else {
     signupError.textContent = '';
+    alert('Sign up successful! Please check your email to confirm.');
     signupForm.reset();
     signupModal.classList.add('hidden');
-    window.location.href = "home.html"; // 🔄 Redirect after signup
   }
 });
 
 // Log In
+const loginForm = document.getElementById('login-form');
+const loginError = document.getElementById('login-error');
+
 loginForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   const email = document.getElementById('login-email').value;
@@ -62,8 +68,8 @@ loginForm.addEventListener('submit', async (e) => {
     loginError.textContent = error.message;
   } else {
     loginError.textContent = '';
+    alert('Login successful!');
     loginForm.reset();
     loginModal.classList.add('hidden');
-    window.location.href = "home.html"; // 🔄 Redirect after login
   }
 });

@@ -1,0 +1,110 @@
+:root {
+  --pastel-green: #d4f1d4;
+  --pastel-pink: #f7d6e0;
+  --pastel-purple: #d3c0eb;
+  --pastel-yellow: #f9f3c6;
+  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  margin: 0;
+  background-color: var(--pastel-green);
+  font-family: var(--font-family);
+  color: #333;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#logo h1 {
+  margin: 0;
+  font-weight: 700;
+  font-size: 2rem;
+  color: #2e7d32; /* deeper green */
+}
+
+#logo p {
+  margin: 0;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: #558b2f;
+}
+
+#auth-buttons button {
+  margin-left: 1rem;
+  padding: 0.5rem 1rem;
+  background: var(--pastel-pink);
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+#auth-buttons button:hover {
+  background: var(--pastel-purple);
+  color: white;
+}
+
+main {
+  padding: 2rem;
+}
+
+#productsContainer, #offersContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(200px,1fr));
+  gap: 1rem;
+}
+
+.product-card, .offer-card {
+  background: white;
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.product-card:hover, .offer-card:hover {
+  transform: translateY(-5px);
+}
+
+.product-image {
+  width: 100%;
+  border-radius: 10px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.product-name {
+  font-weight: 700;
+  margin: 0.5rem 0;
+}
+
+.product-price {
+  color: #388e3c;
+  font-weight: 600;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+/* Add more styling as needed */

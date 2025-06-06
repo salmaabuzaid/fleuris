@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fleuris - Your Garden of Unique Brands</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="styles/main.css" />
+</head>
+<body>
+  <header>
+    <div class="branding">
+      <h1>Fleuris</h1>
+      <p>Your Garden of Unique Brands</p>
+    </div>
+    <div class="auth-buttons">
+      <button onclick="location.href='login.html'">Log In</button>
+      <button onclick="location.href='signup.html'">Sign Up</button>
+    </div>
+  </header>
+
+  <main>
+    <nav class="categories">
+      <button onclick="alert('Browse Offers')">Offers</button>
+      <button onclick="alert('Browse Accessories')">Accessories</button>
+      <button onclick="alert('Browse Makeup')">Makeup</button>
+      <button onclick="alert('Browse Tops')">Tops</button>
+      <button onclick="alert('Browse Bottoms')">Bottoms</button>
+      <!-- add more categories as needed -->
+    </nav>
+
+    <section class="product-listings">
+      <h2>Featured Products</h2>
+      <div id="products" class="products-grid"></div>
+    </section>
+  </main>
+
+  <script src="scripts/app.js"></script>
+  <script>
+    // Load some dummy products for public view
+    const publicProducts = [
+      { id: 1, name: "Floral Earrings", price: "$25", image: "images/earrings.jpg" },
+      { id: 2, name: "Green Skirt", price: "$40", image: "images/skirt.jpg" },
+      { id: 3, name: "Eco Tote Bag", price: "$30", image: "images/tote.jpg" },
+    ];
+
+    const productsDiv = document.getElementById("products");
+
+    publicProducts.forEach((product) => {
+      const prodEl = document.createElement("div");
+      prodEl.className = "product-card";
+      prodEl.innerHTML = `
+        <img src="${product.image}" alt="${product.name}" />
+        <h3>${product.name}</h3>
+        <p>${product.price}</p>
+      `;
+      productsDiv.appendChild(prodEl);
+    });
+  </script>
+</body>
+</html>

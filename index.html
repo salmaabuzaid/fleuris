@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Fleuris - Your Garden of Unique Brands</title>
+<link rel="manifest" href="manifest.json" />
+<link rel="stylesheet" href="styles/main.css" />
+<script defer src="supabaseClient.js"></script>
+<script defer src="scripts/app.js"></script>
+<script defer src="scripts/products.js"></script>
+<script defer src="scripts/community.js"></script>
+<script defer src="scripts/points.js"></script>
+<script defer src="scripts/multilingual.js"></script>
+<script defer src="scripts/wishlist.js"></script>
+</head>
+<body>
+  <header>
+    <div class="logo-tagline">
+      <h1>Fleuris</h1>
+      <p>Your Garden of Unique Brands</p>
+    </div>
+    <nav id="nav-auth">
+      <button id="btnLogin" class="small-btn">Log In</button>
+      <button id="btnSignup" class="small-btn">Sign Up</button>
+      <button id="btnLogout" class="small-btn hidden">Logout</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="categories" aria-label="Product Categories">
+      <button class="category-btn" data-category="offers">Offers</button>
+      <button class="category-btn" data-category="accessories">Accessories</button>
+      <button class="category-btn" data-category="makeup">Makeup</button>
+      <button class="category-btn" data-category="tops">Tops</button>
+      <button class="category-btn" data-category="bottoms">Bottoms</button>
+      <button class="category-btn" data-category="jewelry">Jewelry</button>
+      <button class="category-btn" data-category="shoes">Shoes</button>
+    </section>
+
+    <section id="feed" class="product-list" aria-live="polite">
+      <!-- Products will be rendered here -->
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Fleuris</p>
+  </footer>
+
+<script>
+  // Redirect buttons
+  document.getElementById('btnLogin').onclick = () => window.location.href = 'login.html';
+  document.getElementById('btnSignup').onclick = () => window.location.href = 'signup.html';
+
+  // Logout button logic will be handled in app.js (auth state listener)
+</script>
+</body>
+</html>

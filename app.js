@@ -21,6 +21,14 @@ signupBtn.onclick = () => {
   signupError.textContent = '';
   signupModal.classList.remove('hidden');
 };
+// Open modals
+loginBtn.addEventListener ('click', () => {
+  loginModal.classList.remove('hidden');
+});
+
+signupBtn.addEventListener('click', () => {
+  signupModal.classList.remove('hidden');
+});
 
 // Close modals
 loginCloseBtn.onclick = () => loginModal.classList.add('hidden');

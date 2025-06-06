@@ -50,6 +50,7 @@ signupForm.addEventListener('submit', async (e) => {
     alert('Sign up successful! Please check your email to confirm.');
     signupForm.reset();
     signupModal.classList.add('hidden');
+    window.location.href = "home.html"; // 🔄 Redirect after signup
   }
 });
 
@@ -71,5 +72,6 @@ loginForm.addEventListener('submit', async (e) => {
     alert('Login successful!');
     loginForm.reset();
     loginModal.classList.add('hidden');
+    window.location.href = "home.html"; // 🔄 Redirect after login
   }
 });

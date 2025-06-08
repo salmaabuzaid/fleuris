@@ -1,0 +1,77 @@
+/* Pastel garden theme */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #e9f8ef;
+  color: #333;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #c8e6c9;
+}
+
+.logo-container {
+  text-align: left;
+}
+
+.logo {
+  margin: 0;
+  font-size: 2rem;
+  color: #388e3c;
+}
+
+.tagline {
+  font-size: 0.9rem;
+  color: #558b2f;
+}
+
+.auth-buttons button {
+  margin-left: 10px;
+  padding: 10px 15px;
+  background-color: #a5d6a7;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.auth-buttons button:hover {
+  background-color: #81c784;
+}
+
+.product-showcase {
+  padding: 20px;
+}
+
+.product-grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.product-card {
+  width: 200px;
+  background-color: #ffffff;
+  border: 1px solid #d0f0c0;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+}
+
+.product-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.product-name {
+  margin: 10px 0 5px;
+  font-weight: bold;
+}
+
+.product-price {
+  color: #4caf50;
+}

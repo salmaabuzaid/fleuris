@@ -114,3 +114,64 @@ body {
 .auth-container button:hover {
   background-color: #81c784;
 }
+
+.navbar {
+  display: flex;
+  gap: 15px;
+  background-color: #d0f0c0;
+  padding: 10px 20px;
+  border-radius: 0 0 10px 10px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #33691e;
+  font-weight: bold;
+}
+
+.dashboard {
+  padding: 20px;
+}
+
+.lookbook-grid {
+  display: flex;
+  gap: 15px;
+}
+
+.lookbook-card {
+  background: #f0fff0;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #c8e6c9;
+}
+
+.story-strip {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+}
+
+.story {
+  background: #f9fbe7;
+  padding: 10px;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+
+.auctions, .badges {
+  margin-top: 30px;
+}
+
+.waitlist button {
+  background-color: #f48fb1;
+}
+
+.eco-tag {
+  display: inline-block;
+  background: #a5d6a7;
+  color: #1b5e20;
+  padding: 3px 8px;
+  font-size: 0.8rem;
+  border-radius: 4px;
+  margin-top: 5px;
+}

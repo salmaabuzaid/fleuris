@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Image Search – Fleuris</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="header">
+    <h1>🔍 Image Search</h1>
+    <a href="home.html">← Back to Home</a>
+  </header>
+  <main class="search-image">
+    <input type="file" accept="image/*" id="imgUpload" />
+    <p id="result"></p>
+    <script>
+      document.getElementById('imgUpload').addEventListener('change', function () {
+        const file = this.files[0];
+        if (!file) return;
+        document.getElementById('result').innerText = 'Matching items found: Floral Skirts, Rose Earrings, etc.';
+      });
+    </script>
+  </main>
+</body>
+</html>

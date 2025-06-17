@@ -3,67 +3,80 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Welcome to Fleuris</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Fleuris Home</title>
+  <link rel="stylesheet" href="home.css" />
 </head>
 <body>
-  <header>
-    <div class="logo-container">
-      <h1 class="logo">Fleuris</h1>
-      <div class="tagline">Your Garden of Unique Brands</div>
+
+<header>
+  <div class="logo-container">
+    <h1 class="logo">Fleuris</h1>
+    <div class="tagline">Welcome to Your Garden of Unique Brands</div>
+  </div>
+  <div class="nav-buttons">
+    <a href="#" id="logoutBtn">Logout</a>
+  </div>
+</header>
+
+<main>
+  <h2>Hello, Flower!</h2>
+  <p>You're now logged in to Fleuris 🌸</p>
+
+  <section class="product-grid">
+    <div class="product-card">
+      <img src="assets/earrings.jpg" alt="Pearl Rose Studs">
+      <div class="product-name">Pearl Rose Studs</div>
+      <div class="product-price">15 Coins</div>
     </div>
-    <div class="nav-buttons">
-      <button id="logoutBtn">Logout</button>
+    <div class="product-card">
+      <img src="assets/skirt.jpg" alt="Pastel Pleated Skirt">
+      <div class="product-name">Pastel Pleated Skirt</div>
+      <div class="product-price">30 Coins</div>
     </div>
-  </header>
-
-  <main>
-    <h2 id="welcomeMessage">Welcome back!</h2>
-    <p>Explore the newest items and treat yourself 🌸</p>
-
-    <div class="product-grid">
-      <!-- Sample product cards (can be reused) -->
-      <div class="product-card">
-        <img src="assets/earrings.jpg" alt="Pearl Rose Studs" />
-        <div class="product-name">Pearl Rose Studs</div>
-        <div class="product-price">15 Coins</div>
-      </div>
-      <div class="product-card">
-        <img src="assets/skirt.jpg" alt="Pastel Pleated Skirt" />
-        <div class="product-name">Pastel Pleated Skirt</div>
-        <div class="product-price">30 Coins</div>
-      </div>
+    <div class="product-card">
+      <img src="assets/necklace.jpg" alt="Crystal Garden Necklace">
+      <div class="product-name">Crystal Garden Necklace</div>
+      <div class="product-price">22 Coins</div>
     </div>
-  </main>
+    <div class="product-card">
+      <img src="assets/purse.jpg" alt="Vintage Purse">
+      <div class="product-name">Vintage Purse</div>
+      <div class="product-price">40 Coins</div>
+    </div>
+  </section>
+</main>
 
-  <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyAx7DAvkZupSDXg4aXWvtfSQWhqX32Kwrs",
-      authDomain: "fleuris-3df99.firebaseapp.com",
-      projectId: "fleuris-3df99",
-      storageBucket: "fleuris-3df99.appspot.com",
-      messagingSenderId: "831344111439",
-      appId: "1:831344111439:web:your-app-id"
-    };
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
 
-    auth.onAuthStateChanged(user => {
-      if (user) {
-        document.getElementById('welcomeMessage').textContent = `Welcome, ${user.email}!`;
-      } else {
-        window.location.href = 'index.html';
-      }
+<!-- Firebase Config + Logout -->
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyAx7DAvkZupSDXg4aXWvtfSQWhqX32Kwrs",
+    authDomain: "fleuris-3df99.firebaseapp.com",
+    projectId: "fleuris-3df99",
+    storageBucket: "fleuris-3df99.appspot.com",
+    messagingSenderId: "831344111439",
+    appId: "1:831344111439:web:dummyexample",
+  };
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+
+  // Protect the home page: redirect if not logged in
+  auth.onAuthStateChanged((user) => {
+    if (!user) {
+      window.location.href = "index.html"; // send to login page if not signed in
+    }
+  });
+
+  // Logout button
+  document.getElementById('logoutBtn').addEventListener('click', () => {
+    auth.signOut().then(() => {
+      window.location.href = "index.html";
     });
+  });
+</script>
 
-    document.getElementById('logoutBtn').addEventListener('click', () => {
-      auth.signOut().then(() => {
-        window.location.href = 'index.html';
-      });
-    });
-  </script>
 </body>
 </html>

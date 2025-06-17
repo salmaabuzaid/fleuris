@@ -8,7 +8,7 @@ document.getElementById("signupForm").addEventListener("submit", function (e) {
 
   auth.createUserWithEmailAndPassword(email, password)
     .then(() => {
-      console.log("Redirecting to home.html...")
+      console.log("Redirecting to home.html...");
       window.location.href = "home.html"; // ✅ redirect immediately
     })
     .catch((error) => {

@@ -8,10 +8,7 @@ document.getElementById("signupForm").addEventListener("submit", function (e) {
 
   auth.createUserWithEmailAndPassword(email, password)
     .then(() => {
-      document.getElementById("signupError").textContent = "Account created successfully!";
-      setTimeout(() => {
-        window.location.href = "home.html"; // ensure correct path!
-      }, 1000);
+      window.location.href = "home.html"; // ✅ redirect immediately
     })
     .catch((error) => {
       document.getElementById("signupError").textContent = "Signup failed: " + error.message;

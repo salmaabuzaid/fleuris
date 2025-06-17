@@ -9,8 +9,8 @@ loginForm.addEventListener("submit", function (e) {
 
   firebase.auth().signInWithEmailAndPassword(email, password)
     .then((userCredential) => {
-      console.log("Login successful!");
-      window.location.href = "home.html"; // Redirect to homepage
+     console.log("Redirecting to home...");
+location.replace("home.html"); // Redirect to homepage
     })
     .catch((error) => {
       loginError.textContent = error.message;

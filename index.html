@@ -268,97 +268,98 @@
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVydmNiZHh0bHpvbWdiYmZ3bmNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDkxMjI2NDMsImV4cCI6MjA2NDY5ODY0M30.rr2hpt4QtBK2US92bzYQqhmIE65VIUpZsFpTbIVBt4w'
   );
 
-  <script>
+ <script>
   document.addEventListener('DOMContentLoaded', () => {
     const supabase = supabase.createClient(
       'https://ervcbdxtlzomgbbfwncl.supabase.co',
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVydmNiZHh0bHpvbWdiYmZ3bmNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDkxMjI2NDMsImV4cCI6MjA2NDY5ODY0M30.rr2hpt4QtBK2US92bzYQqhmIE65VIUpZsFpTbIVBt4w'
     );
-    
-  const loginModal = document.getElementById('loginModal');
-  const signupModal = document.getElementById('signupModal');
-  const loginBtn = document.getElementById('loginBtn');
-  const signupBtn = document.getElementById('signupBtn');
 
-  loginBtn.addEventListener('click', () => {
-    loginModal.classList.add('active');
-  });
-  signupBtn.addEventListener('click', () => {
-    signupModal.classList.add('active');
-  });
+    const loginModal = document.getElementById('loginModal');
+    const signupModal = document.getElementById('signupModal');
+    const loginBtn = document.getElementById('loginBtn');
+    const signupBtn = document.getElementById('signupBtn');
 
-  loginModal.querySelector('.close-btn').addEventListener('click', () => {
-    loginModal.classList.remove('active');
-    clearLoginForm();
-  });
-  signupModal.querySelector('.close-btn').addEventListener('click', () => {
-    signupModal.classList.remove('active');
-    clearSignupForm();
-  });
+    loginBtn.addEventListener('click', () => {
+      loginModal.classList.add('active');
+    });
 
-  function clearLoginForm() {
-    document.getElementById('loginError').textContent = '';
-    document.getElementById('loginEmail').value = '';
-    document.getElementById('loginPassword').value = '';
-  }
-  function clearSignupForm() {
-    document.getElementById('signupError').textContent = '';
-    document.getElementById('signupEmail').value = '';
-    document.getElementById('signupPassword').value = '';
-  }
+    signupBtn.addEventListener('click', () => {
+      signupModal.classList.add('active');
+    });
 
-  document.getElementById('loginForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const email = document.getElementById('loginEmail').value.trim();
-    const password = document.getElementById('loginPassword').value.trim();
-    const errorEl = document.getElementById('loginError');
-    errorEl.textContent = '';
+    loginModal.querySelector('.close-btn').addEventListener('click', () => {
+      loginModal.classList.remove('active');
+      clearLoginForm();
+    });
 
-    if (!email || !password) {
-      errorEl.textContent = 'Please enter both email and password.';
-      return;
-    }
-
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) {
-      errorEl.textContent = error.message;
-    } else {
-      window.location.href = 'home.html';
-    }
-  });
-
-  document.getElementById('signupForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const email = document.getElementById('signupEmail').value.trim();
-    const password = document.getElementById('signupPassword').value.trim();
-    const errorEl = document.getElementById('signupError');
-    errorEl.textContent = '';
-
-    if (!email || !password) {
-      errorEl.textContent = 'Please enter both email and password.';
-      return;
-    }
-
-    const { error } = await supabase.auth.signUp({ email, password });
-    if (error) {
-      errorEl.textContent = error.message;
-    } else {
-      alert('Sign up successful! Please check your email to confirm your account.');
+    signupModal.querySelector('.close-btn').addEventListener('click', () => {
       signupModal.classList.remove('active');
       clearSignupForm();
-    }
-  });
+    });
 
-  [loginModal, signupModal].forEach(modal => {
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.classList.remove('active');
-        clearLoginForm();
+    function clearLoginForm() {
+      document.getElementById('loginError').textContent = '';
+      document.getElementById('loginEmail').value = '';
+      document.getElementById('loginPassword').value = '';
+    }
+
+    function clearSignupForm() {
+      document.getElementById('signupError').textContent = '';
+      document.getElementById('signupEmail').value = '';
+      document.getElementById('signupPassword').value = '';
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value.trim();
+      const errorEl = document.getElementById('loginError');
+      errorEl.textContent = '';
+
+      if (!email || !password) {
+        errorEl.textContent = 'Please enter both email and password.';
+        return;
+      }
+
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) {
+        errorEl.textContent = error.message;
+      } else {
+        window.location.href = 'home.html';
+      }
+    });
+
+    document.getElementById('signupForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('signupEmail').value.trim();
+      const password = document.getElementById('signupPassword').value.trim();
+      const errorEl = document.getElementById('signupError');
+      errorEl.textContent = '';
+
+      if (!email || !password) {
+        errorEl.textContent = 'Please enter both email and password.';
+        return;
+      }
+
+      const { error } = await supabase.auth.signUp({ email, password });
+      if (error) {
+        errorEl.textContent = error.message;
+      } else {
+        alert('Sign up successful! Please check your email to confirm your account.');
+        signupModal.classList.remove('active');
         clearSignupForm();
       }
     });
+
+    [loginModal, signupModal].forEach(modal => {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.classList.remove('active');
+          clearLoginForm();
+          clearSignupForm();
+        }
+      });
+    });
   });
-});
 </script>
-</body>
-</html>

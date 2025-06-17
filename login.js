@@ -8,10 +8,7 @@ document.getElementById("loginForm").addEventListener("submit", function (e) {
 
   auth.signInWithEmailAndPassword(email, password)
     .then(() => {
-      document.getElementById("loginError").textContent = "Login successful!";
-      setTimeout(() => {
-        window.location.href = "home.html"; // ensure correct path!
-      }, 1000);
+      window.location.href = "home.html"; // ✅ redirect immediately
     })
     .catch((error) => {
       document.getElementById("loginError").textContent = "Login failed: " + error.message;

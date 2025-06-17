@@ -1,0 +1,117 @@
+/* 🌼 Global Styles */
+:root {
+  --pastel-green: #d6f5d6;
+  --soft-pink: #ffe6f0;
+  --accent-color: #ffb6b9;
+  --text-color: #444;
+  --white: #fff;
+  --rounded: 12px;
+  --shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  --font-main: 'Segoe UI', sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-main);
+  background-color: var(--pastel-green);
+  color: var(--text-color);
+}
+
+/* 🌼 Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: var(--white);
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  margin: 0;
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--accent-color);
+}
+
+.tagline {
+  margin: 0;
+  font-size: 14px;
+  color: #777;
+}
+
+.auth-buttons button {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  margin-left: 10px;
+  border-radius: var(--rounded);
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s ease;
+}
+
+.auth-buttons button:hover {
+  background-color: #ff7a85;
+}
+
+/* 🌸 Product Preview Section */
+.product-preview {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.product-preview h2 {
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 20px;
+  padding: 0 10px;
+}
+
+.product-card {
+  background-color: var(--white);
+  border-radius: var(--rounded);
+  padding: 16px;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease;
+}
+
+.product-card img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--rounded);
+  margin-bottom: 10px;
+}
+
+.product-card p {
+  margin: 0;
+  font-weight: 500;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+}
+
+/* 🌺 Footer */
+.footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+  color: #666;
+  background-color: var(--white);
+  margin-top: 40px;
+}

@@ -1,60 +1,51 @@
-// login.js
+document.addEventListener('DOMContentLoaded', () => {
+  const supabase = window.supabase.createClient(
+    'https://ervcbdxtlzomgbbfwncl.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVydmNiZHh0bHpvbWdiYmZ3bmNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDkxMjI2NDMsImV4cCI6MjA2NDY5ODY0M30.rr2hpt4QtBK2US92bzYQqhmIE65VIUpZsFpTbIVBt4w'
+  );
 
-const supabaseUrl = 'https://ervcbdxtlzomgbbfwncl.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVydmNiZHh0bHpvbWdiYmZ3bmNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDkxMjI2NDMsImV4cCI6MjA2NDY5ODY0M30.rr2hpt4QtBK2US92bzYQqhmIE65VIUpZsFpTbIVBt4w';
-const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+  const loginBtn = document.getElementById('loginBtn');
+  const loginModal = document.getElementById('loginModal');
+  const closeBtn = loginModal.querySelector('.close-btn');
+  const loginForm = document.getElementById('loginForm');
+  const loginError = document.getElementById('loginError');
 
-const loginModal = document.getElementById('loginModal');
-const loginBtn = document.getElementById('loginBtn');
+  loginBtn.addEventListener('click', () => {
+    loginModal.classList.add('active');
+  });
 
-// Open login modal
-loginBtn.addEventListener('click', () => {
-  loginModal.classList.add('active');
-});
+  closeBtn.addEventListener('click', () => {
+    loginModal.classList.remove('active');
+    loginForm.reset();
+    loginError.textContent = '';
+  });
 
-// Close button
-loginModal.querySelector('.close-btn').addEventListener('click', () => {
-  loginModal.classList.remove('active');
-  clearLoginForm();
-});
+  loginModal.addEventListener('click', (e) => {
+    if (e.target === loginModal) {
+      loginModal.classList.remove('active');
+      loginForm.reset();
+      loginError.textContent = '';
+    }
+  });
 
-// Clear login form
-function clearLoginForm() {
-  document.getElementById('loginError').textContent = '';
-  document.getElementById('loginEmail').value = '';
-  document.getElementById('loginPassword').value = '';
-}
+  loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value.trim();
 
-// Login form submit
-document.getElementById('loginForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const email = document.getElementById('loginEmail').value.trim();
-  const password = document.getElementById('loginPassword').value.trim();
-  const errorEl = document.getElementById('loginError');
-  errorEl.textContent = '';
+    loginError.textContent = '';
 
-  if (!email || !password) {
-    errorEl.textContent = 'Please enter both email and password.';
-    return;
-  }
-
-  try {
-    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) {
-      errorEl.textContent = error.message;
+    if (!email || !password) {
+      loginError.textContent = 'Please enter both email and password.';
       return;
     }
-    // Successful login - redirect
-    window.location.href = 'home.html';
-  } catch (err) {
-    errorEl.textContent = 'Unexpected error: ' + err.message;
-  }
-});
 
-// Close modal on clicking outside the modal content
-loginModal.addEventListener('click', (e) => {
-  if (e.target === loginModal) {
-    loginModal.classList.remove('active');
-    clearLoginForm();
-  }
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+
+    if (error) {
+      loginError.textContent = error.message;
+    } else {
+      window.location.href = 'home.html';
+    }
+  });
 });

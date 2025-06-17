@@ -2,90 +2,80 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Fleuris Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fleuris - Explore</title>
   <link rel="stylesheet" href="home.css" />
 </head>
 <body>
 
-  <header class="home-header">
-    <h1>Welcome to Fleuris ✿</h1>
-    <p class="subheading">Your personalized garden of unique brands</p>
+  <!-- Top Header -->
+  <header class="explore-header">
+    <div class="logo-level">
+      <h1 class="logo">Fleuris</h1>
+      <span class="user-level">🌸 Blossom Level</span>
+    </div>
+    <button class="settings-icon" id="settingsBtn">⚙️</button>
   </header>
 
-  <section class="home-feed">
-    <h2>🌸 Trending Picks for You</h2>
-    <div class="product-feed">
-      <div class="product-item">
-        <img src="assets/skirt.jpg" alt="Pastel Pleated Skirt">
-        <div class="name">Pastel Pleated Skirt</div>
-        <div class="price">30 Coins</div>
-      </div>
-      <div class="product-item">
-        <img src="assets/earrings.jpg" alt="Pearl Rose Studs">
-        <div class="name">Pearl Rose Studs</div>
-        <div class="price">15 Coins</div>
-      </div>
-    </div>
-  </section>
-  
-<section class="ai-recommendations">
-  <h2>✨ Your AI-Picked Favorites</h2>
-  <p class="ai-subtext">Tailored just for you — updated daily with love and data.</p>
-  <div class="ai-feed-placeholder">
-    <div class="ai-card">
-      <div class="skeleton-image"></div>
-      <div class="skeleton-text"></div>
-      <div class="skeleton-text short"></div>
-    </div>
-    <div class="ai-card">
-      <div class="skeleton-image"></div>
-      <div class="skeleton-text"></div>
-      <div class="skeleton-text short"></div>
-    </div>
-    <div class="ai-card">
-      <div class="skeleton-image"></div>
-      <div class="skeleton-text"></div>
-      <div class="skeleton-text short"></div>
+  <!-- Settings Modal -->
+  <div class="modal-overlay" id="settingsModal">
+    <div class="modal">
+      <button class="close-btn" onclick="closeModal()">×</button>
+      <ul class="settings-options">
+        <li>🌍 Languages</li>
+        <li>💱 Currencies</li>
+        <li>🔒 Privacy & Security</li>
+        <li>🆘 Help & Support</li>
+        <li>🚪 Sign Out</li>
+      </ul>
     </div>
   </div>
-</section>
-  <div class="tab-content" id="homeTab">
-  <h2>🏠 Home</h2>
-  <p>Welcome to your Fleuris homepage!</p>
-</div>
 
-<div class="tab-content hidden" id="feedTab">
-  <h2>🛍️ Feed</h2>
-  <p>Your curated fashion feed appears here.</p>
-</div>
+  <!-- Search Bar -->
+  <section class="search-section">
+    <input type="text" placeholder="Search products, brands, styles..." class="search-input" />
+    <button class="photo-btn">📷</button>
+    <button class="filter-btn">⚙️</button>
+  </section>
 
-<div class="tab-content hidden" id="aiTab">
-  <h2>🧠 AI Picks</h2>
-  <p>AI-powered personalized suggestions will go here.</p>
-</div>
+  <!-- Filters -->
+  <div class="filters">
+    <button class="filter active">All</button>
+    <button class="filter">Tops</button>
+    <button class="filter">Bottoms</button>
+    <button class="filter">Accessories</button>
+    <button class="filter">Makeup</button>
+  </div>
 
-<div class="tab-content hidden" id="profileTab">
-  <h2>👤 Profile</h2>
-  <p>Your saved items, settings, and history.</p>
-</div>
+  <!-- Product Grid -->
+  <main class="product-grid">
+    <!-- Product Card Example -->
+    <div class="product-card">
+      <img src="assets/earrings.jpg" alt="Pastel Dream Crop Top" />
+      <div class="tags"><span>handmade</span> <span>sustainable</span></div>
+      <div class="name">Pastel Dream Crop Top</div>
+      <div class="price">$29.99 <s>$39.99</s> <span>⭐ 4.8</span></div>
+      <button class="add-cart">Add to Cart</button>
+    </div>
+    <!-- Add more cards here -->
+  </main>
+
+  <!-- Bottom Navigation -->
   <nav class="bottom-nav">
-  <button class="nav-tab active" data-tab="homeTab">
-    <img src="assets/home-icon.svg" alt="Home" />
-    <span>Home</span>
-  </button>
-  <button class="nav-tab" data-tab="feedTab">
-    <img src="assets/feed-icon.svg" alt="Feed" />
-    <span>Feed</span>
-  </button>
-  <button class="nav-tab" data-tab="aiTab">
-    <img src="assets/ai-icon.svg" alt="AI" />
-    <span>AI</span>
-  </button>
-  <button class="nav-tab" data-tab="profileTab">
-    <img src="assets/profile-icon.svg" alt="Profile" />
-    <span>Profile</span>
-  </button>
-</nav>
+    <button class="nav-btn active">Explore</button>
+    <button class="nav-btn">AI Stylist</button>
+    <button class="nav-btn">Following</button>
+    <button class="nav-btn">Me</button>
+  </nav>
+
+  <script>
+    document.getElementById('settingsBtn').onclick = () => {
+      document.getElementById('settingsModal').classList.add('active');
+    };
+    function closeModal() {
+      document.getElementById('settingsModal').classList.remove('active');
+    }
+  </script>
+
 </body>
 </html>

@@ -8,6 +8,7 @@ document.getElementById("loginForm").addEventListener("submit", function (e) {
 
   auth.signInWithEmailAndPassword(email, password)
     .then(() => {
+      console.log("Redirecting to home.html...");
       window.location.href = "home.html"; // ✅ redirect immediately
     })
     .catch((error) => {

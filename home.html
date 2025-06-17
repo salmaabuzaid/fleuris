@@ -2,81 +2,53 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Fleuris Home</title>
   <link rel="stylesheet" href="home.css" />
 </head>
 <body>
 
-<header>
-  <div class="logo-container">
-    <h1 class="logo">Fleuris</h1>
-    <div class="tagline">Welcome to Your Garden of Unique Brands</div>
-  </div>
-  <div class="nav-buttons">
-    <a href="#" id="logoutBtn">Logout</a>
-  </div>
-</header>
+  <header class="home-header">
+    <h1>Welcome to Fleuris ✿</h1>
+    <p class="subheading">Your personalized garden of unique brands</p>
+  </header>
 
-<main>
-  <h2>Hello, Flower!</h2>
-  <p>You're now logged in to Fleuris 🌸</p>
-
-  <section class="product-grid">
-    <div class="product-card">
-      <img src="assets/earrings.jpg" alt="Pearl Rose Studs">
-      <div class="product-name">Pearl Rose Studs</div>
-      <div class="product-price">15 Coins</div>
-    </div>
-    <div class="product-card">
-      <img src="assets/skirt.jpg" alt="Pastel Pleated Skirt">
-      <div class="product-name">Pastel Pleated Skirt</div>
-      <div class="product-price">30 Coins</div>
-    </div>
-    <div class="product-card">
-      <img src="assets/necklace.jpg" alt="Crystal Garden Necklace">
-      <div class="product-name">Crystal Garden Necklace</div>
-      <div class="product-price">22 Coins</div>
-    </div>
-    <div class="product-card">
-      <img src="assets/purse.jpg" alt="Vintage Purse">
-      <div class="product-name">Vintage Purse</div>
-      <div class="product-price">40 Coins</div>
+  <section class="home-feed">
+    <h2>🌸 Trending Picks for You</h2>
+    <div class="product-feed">
+      <div class="product-item">
+        <img src="assets/skirt.jpg" alt="Pastel Pleated Skirt">
+        <div class="name">Pastel Pleated Skirt</div>
+        <div class="price">30 Coins</div>
+      </div>
+      <div class="product-item">
+        <img src="assets/earrings.jpg" alt="Pearl Rose Studs">
+        <div class="name">Pearl Rose Studs</div>
+        <div class="price">15 Coins</div>
+      </div>
     </div>
   </section>
-</main>
-
-<!-- Firebase SDKs -->
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-
-<!-- Firebase Config + Logout -->
-<script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyAx7DAvkZupSDXg4aXWvtfSQWhqX32Kwrs",
-    authDomain: "fleuris-3df99.firebaseapp.com",
-    projectId: "fleuris-3df99",
-    storageBucket: "fleuris-3df99.appspot.com",
-    messagingSenderId: "831344111439",
-    appId: "1:831344111439:web:dummyexample",
-  };
-  firebase.initializeApp(firebaseConfig);
-  const auth = firebase.auth();
-
-  // Protect the home page: redirect if not logged in
-  auth.onAuthStateChanged((user) => {
-    if (!user) {
-      window.location.href = "index.html"; // send to login page if not signed in
-    }
-  });
-
-  // Logout button
-  document.getElementById('logoutBtn').addEventListener('click', () => {
-    auth.signOut().then(() => {
-      window.location.href = "index.html";
-    });
-  });
-</script>
-
+  
+<section class="ai-recommendations">
+  <h2>✨ Your AI-Picked Favorites</h2>
+  <p class="ai-subtext">Tailored just for you — updated daily with love and data.</p>
+  <div class="ai-feed-placeholder">
+    <div class="ai-card">
+      <div class="skeleton-image"></div>
+      <div class="skeleton-text"></div>
+      <div class="skeleton-text short"></div>
+    </div>
+    <div class="ai-card">
+      <div class="skeleton-image"></div>
+      <div class="skeleton-text"></div>
+      <div class="skeleton-text short"></div>
+    </div>
+    <div class="ai-card">
+      <div class="skeleton-image"></div>
+      <div class="skeleton-text"></div>
+      <div class="skeleton-text short"></div>
+    </div>
+  </div>
+</section>
 </body>
 </html>

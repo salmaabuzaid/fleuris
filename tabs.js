@@ -10,6 +10,8 @@
       navButtons.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
+      <button class="nav-tab" data-tab="meTab">Me</button>
+                         
       // Toggle visible tab content
       tabContents.forEach(content => {
         if (content.id === targetId) {

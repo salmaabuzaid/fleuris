@@ -275,3 +275,98 @@ h1, h2, h3, h4 {
   color: #e27373;
   border-bottom: 2px solid #e27373;
 }
+
+/* Following Tab Styles */
+.tab-content {
+  padding: 20px;
+}
+.hidden {
+  display: none !important;
+}
+
+/* Seller Stories */
+.story-carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 15px;
+  padding: 15px 0;
+  border-bottom: 1px solid #cce8d8;
+}
+.story {
+  text-align: center;
+  min-width: 70px;
+}
+.story img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid #a9d5b8;
+  object-fit: cover;
+}
+.story span {
+  font-size: 0.8rem;
+  display: block;
+  margin-top: 5px;
+  color: #2f5847;
+}
+
+/* Seller Feed */
+.feed-card {
+  background: white;
+  margin-top: 20px;
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+  overflow: hidden;
+  padding: 15px;
+}
+.feed-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.feed-header img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+.feed-header div {
+  flex-grow: 1;
+  color: #3a6b49;
+  font-size: 0.9rem;
+}
+.close-post {
+  background: transparent;
+  font-size: 1.3rem;
+  color: #aaa;
+  border: none;
+}
+.feed-img {
+  width: 100%;
+  height: auto;
+  margin: 15px 0;
+  border-radius: 10px;
+  object-fit: cover;
+}
+.feed-actions {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 15px;
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 10px;
+}
+.feed-card p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #444;
+}
+.share-btn {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: #444;
+  cursor: pointer;
+}

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fleuris - Home</title>
+  <link rel="stylesheet" href="home.css" />
+</head>
+<body>
+
+  <!-- Explore Tab -->
+  <div id="explore-tab" class="tab-content">
+
+    <header class="explore-header">
+      <div class="logo-level">
+        <h1 class="logo">Fleuris</h1>
+        <span class="user-level">🌸 Blossom Level</span>
+      </div>
+      <button class="settings-icon" id="settingsBtn">⚙️</button>
+    </header>
+
+    <div class="modal-overlay" id="settingsModal">
+      <div class="modal">
+        <button class="close-btn" onclick="closeModal()">×</button>
+        <ul class="settings-options">
+          <li>🌍 Languages</li>
+          <li>💱 Currencies</li>
+          <li>🔒 Privacy & Security</li>
+          <li>🆘 Help & Support</li>
+          <li>🚪 Sign Out</li>
+        </ul>
+      </div>
+    </div>
+
+    <section class="search-section">
+      <input type="text" placeholder="Search products, brands, styles..." class="search-input" />
+      <button class="photo-btn">📷</button>
+      <button class="filter-btn">⚙️</button>
+    </section>
+
+    <div class="filters">
+      <button class="filter active">All</button>
+      <button class="filter">Tops</button>
+      <button class="filter">Bottoms</button>
+      <button class="filter">Accessories</button>
+      <button class="filter">Makeup</button>
+    </div>
+
+    <main class="product-grid">
+      <div class="product-card">
+        <img src="assets/earrings.jpg" alt="Pastel Dream Crop Top" />
+        <div class="tags"><span>handmade</span> <span>sustainable</span></div>
+        <div class="name">Pastel Dream Crop Top</div>
+        <div class="price">$29.99 <s>$39.99</s> <span>⭐ 4.8</span></div>
+        <button class="add-cart">Add to Cart</button>
+      </div>
+    </main>
+  </div>
+
+  <!-- AI Stylist Tab -->
+  <div id="ai-stylist-tab" class="tab-content" style="display:none;">
+    <header class="explore-header">
+      <div class="logo-level">
+        <h1 class="logo">Fleuris</h1>
+        <span class="user-level">🌸 Blossom Level</span>
+      </div>
+      <button class="settings-icon" id="settingsBtn2">⚙️</button>
+    </header>
+
+    <section class="ai-stylist">
+      <div class="ai-intro">
+        <div class="ai-title">
+          <span class="ai-icon">✨</span>
+          <h2>AI Style Assistant</h2>
+        </div>
+        <p>Your personal fashion expert</p>
+      </div>
+
+      <div class="ai-chat-bubble">
+        Hi! I'm your personal AI stylist 💄✨ I'm here to help you discover amazing fashion finds, create perfect outfits, and give you personalized style advice! What can I help you with today?
+      </div>
+
+      <div class="ai-suggestions">
+        <p>Help me find a cute date night outfit</p>
+        <p>What accessories match my style?</p>
+        <p>Show me sustainable fashion options</p>
+        <p>I need a work-appropriate look</p>
+      </div>
+
+      <div class="ai-input-bar">
+        <button class="photo-btn">📷</button>
+        <input type="text" placeholder="Ask about styles, trends, or get outfit advice..." />
+        <button class="send-btn">➤</button>
+      </div>
+
+      <div class="ai-quick-actions">
+        <button class="quick-btn pink">💗 New Outfit</button>
+        <button class="quick-btn purple">✨ Trends</button>
+        <button class="quick-btn green">🌱 Sustainable</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- Placeholder Tabs -->
+  <div id="following-tab" class="tab-content" style="display:none;">
+    <p>Following content goes here...</p>
+  </div>
+
+  <div id="me-tab" class="tab-content" style="display:none;">
+    <p>Me content goes here...</p>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <button class="nav-btn active" data-tab="explore">Explore</button>
+    <button class="nav-btn" data-tab="ai-stylist">AI Stylist</button>
+    <button class="nav-btn" data-tab="following">Following</button>
+    <button class="nav-btn" data-tab="me">Me</button>
+  </nav>
+
+  <!-- Script -->
+  <script>
+    const navButtons = document.querySelectorAll('.nav-btn');
+    const tabs = document.querySelectorAll('.tab-content');
+
+    navButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabs.forEach(tab => tab.style.display = 'none');
+        navButtons.forEach(b => b.classList.remove('active'));
+
+        const targetId = btn.dataset.tab + '-tab';
+        document.getElementById(targetId).style.display = 'block';
+        btn.classList.add('active');
+      });
+    });
+
+    document.getElementById('settingsBtn').onclick = () => {
+      document.getElementById('settingsModal').classList.add('active');
+    };
+    document.getElementById('settingsBtn2').onclick = () => {
+      document.getElementById('settingsModal').classList.add('active');
+    };
+
+    function closeModal() {
+      document.getElementById('settingsModal').classList.remove('active');
+    }
+  </script>
+
+</body>
+</html>

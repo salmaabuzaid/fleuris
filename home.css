@@ -370,3 +370,97 @@ h1, h2, h3, h4 {
   color: #444;
   cursor: pointer;
 }
+/* Me Tab Styles */
+.profile-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+  text-align: center;
+  color: #2f5847;
+  margin-bottom: 20px;
+}
+.profile-card h2 {
+  margin-bottom: 5px;
+  font-size: 1.6rem;
+}
+.profile-card p {
+  font-size: 0.9rem;
+  color: #5b7d6c;
+}
+.level-badge {
+  background-color: #f8d5e2;
+  color: #a7446e;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 20px;
+  display: inline-block;
+  margin: 10px 0;
+}
+.progress-bar {
+  background-color: #e5f2ec;
+  height: 8px;
+  border-radius: 10px;
+  margin: 10px 0;
+  width: 100%;
+}
+.progress {
+  background-color: #a9d5b8;
+  height: 100%;
+  border-radius: 10px;
+}
+.progress-text {
+  font-size: 0.8rem;
+  color: #759a82;
+}
+.perks {
+  text-align: left;
+  margin-top: 15px;
+}
+.perks h4 {
+  margin-bottom: 5px;
+  font-size: 1rem;
+}
+.perks ul {
+  padding-left: 20px;
+  color: #3a6b49;
+  font-size: 0.9rem;
+}
+
+/* Activity Summary */
+.activity-summary {
+  display: flex;
+  justify-content: space-around;
+  background-color: #d9f0e7;
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+.activity-item {
+  flex: 1;
+  text-align: center;
+  font-size: 1rem;
+  color: #385f4b;
+  font-weight: 600;
+}
+
+/* Navigation Tiles */
+.nav-tiles {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+.tile {
+  background-color: #f7fdf9;
+  border: 1.5px solid #a9d5b8;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 600;
+  color: #2f5847;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: background-color 0.3s ease;
+}
+.tile:hover {
+  background-color: #d9f0e7;
+}

@@ -1,25 +1,19 @@
-<script>
-  const navButtons = document.querySelectorAll('.nav-btn');
-  const tabContents = document.querySelectorAll('.tab-content');
+const tabs = document.querySelectorAll('.nav-tab');
+const contents = document.querySelectorAll('.tab-content');
 
-  navButtons.forEach((btn, index) => {
-    btn.addEventListener('click', () => {
-      const targetId = btn.textContent.toLowerCase().replace(/\s+/g, '') + 'Tab';
+tabs.forEach((tab) => {
+  tab.addEventListener('click', () => {
+    const target = tab.getAttribute('data-tab');
 
-      // Toggle active state on nav buttons
-      navButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+    // Remove active class from all tabs
+    tabs.forEach(t => t.classList.remove('active'));
+    // Add active class to clicked tab
+    tab.classList.add('active');
 
-      <button class="nav-tab" data-tab="meTab">Me</button>
-                         
-      // Toggle visible tab content
-      tabContents.forEach(content => {
-        if (content.id === targetId) {
-          content.classList.remove('hidden');
-        } else {
-          content.classList.add('hidden');
-        }
-      });
-    });
+    // Hide all content
+    contents.forEach(c => c.classList.add('hidden'));
+
+    // Show the selected content
+    document.getElementById(target).classList.remove('hidden');
   });
-</script>
+});

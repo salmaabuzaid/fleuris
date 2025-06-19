@@ -120,10 +120,6 @@
   }
 </script>
 
-<!-- Firebase SDKs -->
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-
 <!-- Firebase Initialization -->
 <script>
   const firebaseConfig = {
@@ -136,16 +132,10 @@
   };
   firebase.initializeApp(firebaseConfig);
 </script>
-
-  <script>
-  setTimeout(() => {
-    window.location.href = "home.html";
-  }, 2000);
-</script>
   
 <!-- Auth Scripts -->
-<script src="firebase-init.js"></script>
-<script src="login.js"></script>
-<script src="signup.js"></script>
+<script src="firebase-init.js" defer></script>
+<script src="login.js" defer></script>
+<script src="signup.js" defer></script>
 </body>
 </html>

@@ -8,120 +8,181 @@
   <link rel="stylesheet" href="home.css" />
 </head>
 <body>
-  <!-- Header -->
-  <header>
-    <div class="logo-container">
+
+  <!-- Top Header -->
+  <header class="explore-header">
+    <div class="logo-level">
       <h1 class="logo">Fleuris</h1>
-      <p class="tagline">Your Garden of Unique Brands</p>
+      <span class="user-level">🌸 Blossom Level</span>
     </div>
-    <div class="nav-buttons">
-      <button class="level-badge">🌼 Blossom Level</button>
-      <button style="background-color:#c6f2dd; color:#2f5847; font-weight:600;">🪙 1,247</button>
-      <button id="settingsBtn">⚙️</button>
-    </div>
+    <button class="settings-icon" id="settingsBtn">⚙️</button>
   </header>
 
-  <!-- Tabs Navigation -->
-  <nav style="display:flex; justify-content: space-around; padding: 10px 0; background-color: #e9f7f1; position: sticky; bottom: 0; z-index: 50;">
-    <button class="nav-tab active" data-tab="exploreTab">Explore</button>
-    <button class="nav-tab" data-tab="followingTab">Following</button>
-    <button class="nav-tab" data-tab="meTab">Me</button>
-  </nav>
+  <!-- Settings Modal -->
+  <div class="modal-overlay" id="settingsModal">
+    <div class="modal">
+      <button class="close-btn" onclick="closeModal()">×</button>
+      <ul class="settings-options">
+        <li>🌍 Languages</li>
+        <li>💱 Currencies</li>
+        <li>🔒 Privacy & Security</li>
+        <li>🆘 Help & Support</li>
+        <li>🚪 Sign Out</li>
+      </ul>
+    </div>
+  </div>
 
-  <!-- Tabs Content -->
+  <!-- Tab Content Areas -->
   <main>
-    <!-- EXPLORE TAB -->
+    <!-- Explore Tab -->
     <div id="exploreTab" class="tab-content">
-      <h2>Discover Products</h2>
+      <section class="search-section">
+        <input type="text" placeholder="Search products, brands, styles..." class="search-input" />
+        <button class="photo-btn">📷</button>
+        <button class="filter-btn">⚙️</button>
+      </section>
+
+      <div class="filters">
+        <button class="filter active">All</button>
+        <button class="filter">Tops</button>
+        <button class="filter">Bottoms</button>
+        <button class="filter">Accessories</button>
+        <button class="filter">Makeup</button>
+      </div>
+
       <div class="product-grid">
         <div class="product-card">
-          <img src="https://via.placeholder.com/150" alt="Product 1" />
-          <div class="product-name">Pastel Earrings</div>
-          <div class="product-price">$14.99</div>
+          <img src="assets/earrings.jpg" alt="Pastel Dream Crop Top" />
+          <div class="tags"><span>handmade</span> <span>sustainable</span></div>
+          <div class="name">Pastel Dream Crop Top</div>
+          <div class="price">$29.99 <s>$39.99</s> <span>⭐ 4.8</span></div>
+          <button class="add-cart">Add to Cart</button>
         </div>
-        <div class="product-card">
-          <img src="https://via.placeholder.com/150" alt="Product 2" />
-          <div class="product-name">Floral Top</div>
-          <div class="product-price">$22.00</div>
-        </div>
-        <!-- Add more products as needed -->
+        <!-- Add more cards here -->
       </div>
     </div>
 
-    <!-- FOLLOWING TAB -->
-    <div id="followingTab" class="tab-content hidden">
-      <!-- Stories -->
-      <div style="display: flex; gap: 12px; overflow-x: auto; padding: 10px 0; margin-bottom: 20px;">
-        <div style="text-align: center;">
-          <img src="https://via.placeholder.com/60" style="border-radius: 50%; border: 3px solid #a9d5b8;" />
-          <p style="font-size: 0.8rem;">BloomStyle</p>
-        </div>
-        <div style="text-align: center;">
-          <img src="https://via.placeholder.com/60" style="border-radius: 50%; border: 3px solid #a9d5b8;" />
-          <p style="font-size: 0.8rem;">GardenGal</p>
-        </div>
-        <!-- Add more stories -->
+    <!-- AI Stylist Tab -->
+    <div id="aiTab" class="tab-content hidden">
+      <section class="ai-header">
+        <h2>AI Style Assistant 💄✨</h2>
+        <p>I'm here to help you discover fashion finds and give you style advice!</p>
+      </section>
+
+      <div class="ai-messages">
+        <p class="ai-message">Hi! What can I help you with today?</p>
+        <button class="ai-option">Help me find a cute date night outfit</button>
+        <button class="ai-option">What accessories match my style?</button>
+        <button class="ai-option">Show me sustainable fashion options</button>
+        <button class="ai-option">I need a work-appropriate look</button>
       </div>
 
-      <!-- Posts Feed -->
-      <div class="product-card">
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <img src="https://via.placeholder.com/40" style="border-radius: 50%;" />
+      <div class="ai-input-section">
+        <button class="photo-btn">📷</button>
+        <input type="text" class="ai-input" placeholder="Ask about styles, trends, or get outfit advice..." />
+        <button class="send-btn">📩</button>
+      </div>
+
+      <div class="ai-tags">
+        <button class="tag pink">❤️ New Outfit</button>
+        <button class="tag purple">✨ Trends</button>
+        <button class="tag green">🌱 Sustainable</button>
+      </div>
+    </div>
+
+    <!-- Following Tab -->
+    <div id="followingTab" class="tab-content hidden">
+      <div class="stories">
+        <div class="story">
+          <img src="assets/story1.jpg" />
+          <p>BloomStyle</p>
+        </div>
+        <div class="story">
+          <img src="assets/story2.jpg" />
+          <p>GardenChic</p>
+        </div>
+        <div class="story">
+          <img src="assets/story3.jpg" />
+          <p>PetalJewels</p>
+        </div>
+      </div>
+
+      <div class="feed-post">
+        <div class="post-header">
+          <img src="assets/story1.jpg" class="profile-img" />
           <div>
             <strong>BloomStyle</strong>
-            <div style="font-size: 0.8rem; color: #888;">3h ago</div>
+            <div class="timestamp">3h ago</div>
           </div>
         </div>
-        <img src="https://via.placeholder.com/300x400" alt="New Arrival" style="margin: 15px 0; border-radius: 10px;" />
-        <div style="display: flex; justify-content: space-between; font-size: 0.9rem; color: #385f4b;">
+        <img src="assets/earrings.jpg" class="post-image" />
+        <div class="post-actions">
           <span>❤️ 342</span>
           <span>💬 28</span>
           <span>↗️</span>
         </div>
-        <p style="margin-top: 10px;"><strong>BloomStyle ✨</strong> New arrivals are here! Our pastel collection is perfect for spring. Which one is your favorite? 🌸</p>
+        <p><strong>BloomStyle ✨</strong> New arrivals are here! Which one is your favorite? 🌸</p>
       </div>
     </div>
 
-    <!-- ME TAB -->
+    <!-- Me Tab -->
     <div id="meTab" class="tab-content hidden">
-      <!-- Profile Section -->
-      <div class="profile-card">
+      <section class="me-profile">
         <h2>@FleurisUser</h2>
-        <p>Joined: January 2025</p>
-        <div class="membership">
-          <span class="level-badge">🌹 Rosebud Level</span>
+        <p>Joined January 2025</p>
+
+        <div class="membership-info">
+          <span>🎀 Rosebud Level</span>
           <p>Points: <strong>0</strong></p>
+          <p>Progress to Blossom: 0%</p>
           <div class="progress-bar"><div class="progress" style="width: 0%"></div></div>
-          <p class="progress-text">Progress to Blossom: 0%</p>
         </div>
+
         <div class="perks">
-          <h4>Perks:</h4>
+          <h4>Current Perks</h4>
           <ul>
-            <li>🌸 Early access to spring collections</li>
-            <li>🎁 Birthday bonus coins</li>
-            <li>📦 Faster shipping eligibility</li>
+            <li>🌸 Early Access</li>
+            <li>🎁 Bonus Coins</li>
+            <li>🚚 Faster Shipping</li>
           </ul>
         </div>
-      </div>
 
-      <!-- Activity Summary -->
-      <div class="activity-summary">
-        <div class="activity-item">📦 Orders</div>
-        <div class="activity-item">📝 Reviews</div>
-        <div class="activity-item">👥 Following</div>
-      </div>
+        <div class="user-activity">
+          <div>📦 Orders</div>
+          <div>📝 Reviews</div>
+          <div>👥 Following</div>
+        </div>
 
-      <!-- Navigation Tiles -->
-      <div class="nav-tiles">
-        <div class="tile">🛒 Cart</div>
-        <div class="tile">💖 Wishlist</div>
-        <div class="tile">📔 Lookbooks</div>
-        <div class="tile">🏅 Badges</div>
-      </div>
+        <div class="user-nav">
+          <div>🛒 Cart</div>
+          <div>💖 Wishlist</div>
+          <div>📔 Lookbooks</div>
+          <div>🏅 Badges</div>
+        </div>
+      </section>
     </div>
   </main>
 
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <button class="nav-tab active" data-tab="exploreTab">Explore</button>
+    <button class="nav-tab" data-tab="aiTab">AI Stylist</button>
+    <button class="nav-tab" data-tab="followingTab">Following</button>
+    <button class="nav-tab" data-tab="meTab">Me</button>
+  </nav>
+
   <!-- Tabs Script -->
   <script src="tabs.js"></script>
+
+  <!-- Settings Modal Script -->
+  <script>
+    document.getElementById('settingsBtn').onclick = () => {
+      document.getElementById('settingsModal').classList.add('active');
+    };
+    function closeModal() {
+      document.getElementById('settingsModal').classList.remove('active');
+    }
+  </script>
+
 </body>
 </html>

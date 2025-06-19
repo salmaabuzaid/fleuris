@@ -23,15 +23,29 @@
     <div class="modal">
       <button class="close-btn" onclick="closeModal()">×</button>
       <ul class="settings-options">
-        <li>🌍 Languages</li>
-        <li>💱 Currencies</li>
-        <li>🔒 Privacy & Security</li>
-        <li>🆘 Help & Support</li>
-        <li>🚪 Sign Out</li>
-      </ul>
-    </div>
-  </div>
-
+  <li>
+  🌍 Language:
+  <select id="languageSelect">
+    <option value="en">English</option>
+    <option value="fr">Français</option>
+    <option value="ar">العربية</option>
+    <option value="hi">हिन्दी</option>
+    <option value="de">Deutsch</option>
+  </select>
+</li>
+<li>💱 Currency:
+    <select id="currencySelect">
+      <option value="USD">$ USD</option>
+      <option value="EUR">€ EUR</option>
+      <option value="EGP">£ EGP</option>
+    </select>
+  </li>
+  <li>🔒 Privacy & Security</li>
+  <li>🆘 Help & Support</li>
+  <li>🚪 Sign Out</li>
+  </ul>
+ </div>
+</div>
   <!-- Tab Content Areas -->
   <main>
     <!-- Explore Tab -->
@@ -183,6 +197,71 @@
       document.getElementById('settingsModal').classList.remove('active');
     }
   </script>
+<!-- Language Switching Script -->
+  <script>
+    const translations = {
+      en: {
+        explore: "Explore",
+        stylist: "AI Stylist",
+        following: "Following",
+        me: "Me",
+        searchPlaceholder: "Search products, brands, styles...",
+        blossomLevel: "🌸 Blossom Level"
+      },
+      fr: {
+        explore: "Explorer",
+        stylist: "Styliste IA",
+        following: "Abonnements",
+        me: "Moi",
+        searchPlaceholder: "Rechercher des produits, marques, styles...",
+        blossomLevel: "🌸 Niveau Fleurissant"
+      },
+      ar: {
+        explore: "استكشاف",
+        stylist: "المصمم الذكي",
+        following: "المتابَعون",
+        me: "صفحتي",
+        searchPlaceholder: "ابحث عن منتجات، ماركات، أنماط...",
+        blossomLevel: "🌸 مستوى بلوسوم"
+      },
+      hi: {
+        explore: "खोजें",
+        stylist: "एआई स्टाइलिस्ट",
+        following: "फ़ॉलोइंग",
+        me: "मैं",
+        searchPlaceholder: "उत्पाद, ब्रांड, स्टाइल खोजें...",
+        blossomLevel: "🌸 ब्लॉसम स्तर"
+      },
+      de: {
+        explore: "Entdecken",
+        stylist: "KI-Stylist",
+        following: "Gefolgt",
+        me: "Ich",
+        searchPlaceholder: "Produkte, Marken, Stile suchen...",
+        blossomLevel: "🌸 Blütenniveau"
+      }
+    };
 
+    const applyTranslations = (lang) => {
+      const t = translations[lang];
+      document.querySelector('[data-tab="exploreTab"]').textContent = t.explore;
+      document.querySelector('[data-tab="aiTab"]').textContent = t.stylist;
+      document.querySelector('[data-tab="followingTab"]').textContent = t.following;
+      document.querySelector('[data-tab="meTab"]').textContent = t.me;
+      document.querySelector('.search-input').placeholder = t.searchPlaceholder;
+      document.querySelector('.user-level').textContent = t.blossomLevel;
+      document.body.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
+    };
+
+    const savedLang = localStorage.getItem("lang") || "en";
+    document.getElementById("languageSelect").value = savedLang;
+    applyTranslations(savedLang);
+
+    document.getElementById("languageSelect").addEventListener("change", (e) => {
+      const selectedLang = e.target.value;
+      localStorage.setItem("lang", selectedLang);
+      applyTranslations(selectedLang);
+    });
+  </script>
 </body>
 </html>

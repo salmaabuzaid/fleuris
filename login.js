@@ -3,15 +3,22 @@ const auth = firebase.auth();
 document.getElementById("loginForm").addEventListener("submit", function (e) {
   e.preventDefault();
 
-  const email = document.getElementById("loginEmail").value;
+  const email = document.getElementById("loginEmail").value.trim();
   const password = document.getElementById("loginPassword").value;
+
+  const errorDiv = document.getElementById("loginError");
+
+  if (!email || !password) {
+    errorDiv.textContent = "Please enter both email and password.";
+    return;
+  }
 
   auth.signInWithEmailAndPassword(email, password)
     .then(() => {
-      console.log("Redirecting to home.html...");
-      window.location.href = "home.html"; // ✅ redirect immediately
+      errorDiv.textContent = "";
+      window.location.href = "home.html";
     })
     .catch((error) => {
-      document.getElementById("loginError").textContent = "Login failed: " + error.message;
+      errorDiv.textContent = "Login failed: " + error.message;
     });
 });

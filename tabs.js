@@ -1,19 +1,20 @@
-const tabs = document.querySelectorAll('.nav-tab');
-const contents = document.querySelectorAll('.tab-content');
+document.addEventListener("DOMContentLoaded", () => {
+  const tabs = document.querySelectorAll(".nav-tab");
+  const contents = document.querySelectorAll(".tab-content");
 
-tabs.forEach((tab) => {
-  tab.addEventListener('click', () => {
-    const target = tab.getAttribute('data-tab');
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const targetId = tab.getAttribute("data-tab");
 
-    // Remove active class from all tabs
-    tabs.forEach(t => t.classList.remove('active'));
-    // Add active class to clicked tab
-    tab.classList.add('active');
+      // Deactivate all tabs
+      tabs.forEach((btn) => btn.classList.remove("active"));
 
-    // Hide all content
-    contents.forEach(c => c.classList.add('hidden'));
+      // Hide all tab contents
+      contents.forEach((content) => content.classList.add("hidden"));
 
-    // Show the selected content
-    document.getElementById(target).classList.remove('hidden');
+      // Activate clicked tab and show related content
+      tab.classList.add("active");
+      document.getElementById(targetId).classList.remove("hidden");
+    });
   });
 });

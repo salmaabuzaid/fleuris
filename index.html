@@ -3,223 +3,271 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Fleuris – Marketplace for Buyers & Sellers</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Roboto&display=swap">
+  <title>Fleuris | Your Garden of Unique Brands</title>
   <style>
     body {
-      font-family: 'Roboto', sans-serif;
       margin: 0;
-      padding: 0;
-      background: #fdfdfb;
+      font-family: 'Segoe UI', sans-serif;
+      background: #fdfdfd;
       color: #333;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
     }
+
     header {
+      background: #d8f3dc;
+      padding: 20px;
       text-align: center;
-      margin-bottom: 2rem;
+      font-size: 28px;
+      font-weight: bold;
+      color: #1b4332;
     }
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 3rem;
-      color: #4e9c81;
+
+    .hero {
+      padding: 60px 20px;
+      text-align: center;
+      background: #e6f4ea;
     }
-    p {
-      font-size: 1.1rem;
-      margin-bottom: 2rem;
+
+    .hero h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+      color: #2d6a4f;
     }
+
+    .hero p {
+      font-size: 18px;
+      margin-bottom: 30px;
+      color: #555;
+    }
+
     .buttons {
       display: flex;
-      gap: 1.5rem;
-      flex-wrap: wrap;
       justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
     }
+
     .buttons button {
-      background-color: #4e9c81;
+      padding: 14px 28px;
+      background: #74c69d;
       color: white;
+      border-radius: 30px;
+      font-weight: bold;
       border: none;
-      padding: 1rem 1.5rem;
-      border-radius: 5px;
       cursor: pointer;
-      font-size: 1rem;
-      transition: background 0.3s;
     }
-    .buttons button:hover {
-      background-color: #3e7b67;
+
+    section {
+      padding: 40px 20px;
+      text-align: center;
     }
+
+    .footer {
+      background: #d8f3dc;
+      padding: 15px;
+      text-align: center;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .language-switch {
+      margin-top: 10px;
+    }
+
+    .language-switch select {
+      padding: 6px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    /* Modal Styles */
     .modal {
       display: none;
       position: fixed;
-      top: 0; left: 0;
+      z-index: 100;
+      left: 0; top: 0;
       width: 100%; height: 100%;
-      background: rgba(0,0,0,0.5);
+      background-color: rgba(0,0,0,0.5);
       justify-content: center;
       align-items: center;
-      z-index: 1000;
     }
+
     .modal-content {
-      background: white;
-      padding: 2rem;
-      border-radius: 8px;
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
       max-width: 400px;
       width: 90%;
+      text-align: left;
     }
-    .modal-content h2 {
-      margin-top: 0;
-      color: #4e9c81;
-    }
+
     .modal-content input {
       width: 100%;
-      padding: 0.75rem;
-      margin: 0.5rem 0;
+      margin-bottom: 12px;
+      padding: 10px;
       border: 1px solid #ccc;
-      border-radius: 5px;
+      border-radius: 6px;
     }
+
     .modal-content button {
       width: 100%;
-      padding: 0.75rem;
-      background-color: #4e9c81;
+      background: #52b788;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
       color: white;
-      border: none;
-      border-radius: 5px;
-      margin-top: 1rem;
-      cursor: pointer;
+      font-weight: bold;
     }
-    .close-btn {
-      background: transparent;
-      color: #555;
-      font-size: 1.2rem;
-      border: none;
+
+    .modal-content h3 {
+      margin-top: 0;
+    }
+
+    .close {
       float: right;
       cursor: pointer;
+      font-weight: bold;
+      font-size: 18px;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Fleuris</h1>
-    <p>The girly marketplace for fashion, beauty, and lifestyle lovers.</p>
-  </header>
 
+<header>Fleuris</header>
+
+<div class="hero">
+  <h1>Welcome to Fleuris 🌸</h1>
+  <p>The girly marketplace for fashion, beauty, and lifestyle lovers.</p>
   <div class="buttons">
-    <button onclick="openModal('buyerLoginModal')">Login as Buyer</button>
-    <button onclick="openModal('buyerSignupModal')">Sign Up as Buyer</button>
-    <button onclick="openModal('sellerLoginModal')">Login as Seller</button>
-    <button onclick="openModal('sellerSignupModal')">Sign Up as Seller</button>
+    <button onclick="openModal('buyer-signup')">Sign Up as Buyer</button>
+    <button onclick="openModal('seller-signup')">Sign Up as Seller</button>
+    <button onclick="openModal('buyer-login')">Log In as Buyer</button>
+    <button onclick="openModal('seller-login')">Log In as Seller</button>
   </div>
+</div>
 
-  <!-- Modals -->
-  <div id="buyerLoginModal" class="modal">
-    <div class="modal-content">
-      <button class="close-btn" onclick="closeModal('buyerLoginModal')">×</button>
-      <h2>Buyer Login</h2>
-      <input id="buyerLoginEmail" type="email" placeholder="Email">
-      <input id="buyerLoginPassword" type="password" placeholder="Password">
-      <button onclick="login('buyer')">Login</button>
-    </div>
+<section>
+  <h2>Why Fleuris?</h2>
+  <p>✨ A place where beauty, elegance, and identity are celebrated.<br>
+     ✨ AI styling, lookbooks, auctions, rewards & community built for women.<br>
+     ✨ Shop and sell in a safe, soft, stylish space.</p>
+</section>
+
+<div class="footer">
+  &copy; 2025 Fleuris. All rights reserved.
+  <div class="language-switch">
+    <label for="lang">🌍 Language:</label>
+    <select id="lang">
+      <option>English</option>
+      <option>Français</option>
+      <option>عربي</option>
+      <option>हिन्दी</option>
+      <option>Deutsch</option>
+    </select>
   </div>
+</div>
 
-  <div id="buyerSignupModal" class="modal">
-    <div class="modal-content">
-      <button class="close-btn" onclick="closeModal('buyerSignupModal')">×</button>
-      <h2>Buyer Sign Up</h2>
-      <input id="buyerSignupEmail" type="email" placeholder="Email">
-      <input id="buyerSignupPassword" type="password" placeholder="Password">
-      <button onclick="signUp('buyer')">Sign Up</button>
-    </div>
-  </div>
+<!-- Modals -->
+<div id="buyer-signup" class="modal"><div class="modal-content">
+  <span class="close" onclick="closeModal('buyer-signup')">&times;</span>
+  <h3>Sign Up as Buyer</h3>
+  <input type="email" id="buyerSignupEmail" placeholder="Email" />
+  <input type="password" id="buyerSignupPassword" placeholder="Password" />
+  <button onclick="signUp('buyer')">Create Account</button>
+</div></div>
 
-  <div id="sellerLoginModal" class="modal">
-    <div class="modal-content">
-      <button class="close-btn" onclick="closeModal('sellerLoginModal')">×</button>
-      <h2>Seller Login</h2>
-      <input id="sellerLoginEmail" type="email" placeholder="Email">
-      <input id="sellerLoginPassword" type="password" placeholder="Password">
-      <button onclick="login('seller')">Login</button>
-    </div>
-  </div>
+<div id="seller-signup" class="modal"><div class="modal-content">
+  <span class="close" onclick="closeModal('seller-signup')">&times;</span>
+  <h3>Sign Up as Seller</h3>
+  <input type="email" id="sellerSignupEmail" placeholder="Email" />
+  <input type="password" id="sellerSignupPassword" placeholder="Password" />
+  <button onclick="signUp('seller')">Create Account</button>
+</div></div>
 
-  <div id="sellerSignupModal" class="modal">
-    <div class="modal-content">
-      <button class="close-btn" onclick="closeModal('sellerSignupModal')">×</button>
-      <h2>Seller Sign Up</h2>
-      <input id="sellerSignupEmail" type="email" placeholder="Email">
-      <input id="sellerSignupPassword" type="password" placeholder="Password">
-      <button onclick="signUp('seller')">Sign Up</button>
-    </div>
-  </div>
+<div id="buyer-login" class="modal"><div class="modal-content">
+  <span class="close" onclick="closeModal('buyer-login')">&times;</span>
+  <h3>Log In as Buyer</h3>
+  <input type="email" id="buyerLoginEmail" placeholder="Email" />
+  <input type="password" id="buyerLoginPassword" placeholder="Password" />
+  <button onclick="login('buyer')">Log In</button>
+</div></div>
 
-  <!-- Firebase + Logic -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
-    import { getFirestore, setDoc, getDoc, doc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
+<div id="seller-login" class="modal"><div class="modal-content">
+  <span class="close" onclick="closeModal('seller-login')">&times;</span>
+  <h3>Log In as Seller</h3>
+  <input type="email" id="sellerLoginEmail" placeholder="Email" />
+  <input type="password" id="sellerLoginPassword" placeholder="Password" />
+  <button onclick="login('seller')">Log In</button>
+</div></div>
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyAx7DAvkZupSDXg4aXWvtfSQWhqX32Kwrs",
-      authDomain: "fleuris-3df99.firebaseapp.com",
-      projectId: "fleuris-3df99",
-      storageBucket: "fleuris-3df99.appspot.com",
-      messagingSenderId: "831344111439",
-      appId: "1:831344111439:web:placeholder"
-    };
+<!-- Firebase + Firestore Script -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
+  import { getFirestore, setDoc, getDoc, doc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
+  const firebaseConfig = {
+    apiKey: "AIzaSyAx7DAvkZupSDXg4aXWvtfSQWhqX32Kwrs",
+    authDomain: "fleuris-3df99.firebaseapp.com",
+    projectId: "fleuris-3df99",
+    storageBucket: "fleuris-3df99.appspot.com",
+    messagingSenderId: "831344111439",
+    appId: "1:831344111439:web:placeholder"
+  };
 
-    window.signUp = async function(role) {
-      const email = document.getElementById(`${role}SignupEmail`).value;
-      const password = document.getElementById(`${role}SignupPassword`).value;
-      try {
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
 
-        await setDoc(doc(db, "users", user.uid), {
-          email,
-          role,
-          createdAt: serverTimestamp()
-        });
+  window.signUp = async function(role) {
+    const email = document.getElementById(`${role}SignupEmail`).value;
+    const password = document.getElementById(`${role}SignupPassword`).value;
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
 
-        alert("Signed up successfully!");
-        location.href = role === "buyer" ? "home.html" : "seller.html";
-      } catch (error) {
-        alert(error.message);
+      await setDoc(doc(db, "users", user.uid), {
+        email,
+        role,
+        createdAt: serverTimestamp()
+      });
+
+      alert("Signed up successfully!");
+      location.href = role === "buyer" ? "home.html" : "seller.html";
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+  window.login = async function(role) {
+    const email = document.getElementById(`${role}LoginEmail`).value;
+    const password = document.getElementById(`${role}LoginPassword`).value;
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      const userDoc = await getDoc(doc(db, "users", user.uid));
+      const userData = userDoc.data();
+
+      if (!userData || userData.role !== role) {
+        alert("You're logging in with the wrong role.");
+        return;
       }
-    };
 
-    window.login = async function(role) {
-      const email = document.getElementById(`${role}LoginEmail`).value;
-      const password = document.getElementById(`${role}LoginPassword`).value;
-      try {
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
+      alert("Logged in!");
+      location.href = role === "buyer" ? "home.html" : "seller.html";
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
-        const userDoc = await getDoc(doc(db, "users", user.uid));
-        const userData = userDoc.data();
+  window.openModal = function(id) {
+    document.getElementById(id).style.display = 'flex';
+  }
 
-        if (!userData || userData.role !== role) {
-          alert("You're logging in with the wrong role.");
-          return;
-        }
+  window.closeModal = function(id) {
+    document.getElementById(id).style.display = 'none';
+  }
+</script>
 
-        alert("Logged in!");
-        location.href = role === "buyer" ? "home.html" : "seller.html";
-      } catch (error) {
-        alert(error.message);
-      }
-    };
-
-    window.openModal = function(id) {
-      document.getElementById(id).style.display = 'flex';
-    };
-
-    window.closeModal = function(id) {
-      document.getElementById(id).style.display = 'none';
-    };
-  </script>
 </body>
 </html>

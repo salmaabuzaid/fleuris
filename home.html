@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fleuris – Explore</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="home.css">
+</head>
+<body>
+  <div class="top-nav">
+    <div class="brand">Fleuris</div>
+    <div class="user-level">Lv. 1 🌸</div>
+    <div class="settings-icon" onclick="toggleSettings()">⚙️</div>
+  </div>
+
+  <div id="settingsModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="toggleSettings()">&times;</span>
+      <h3>Settings</h3>
+      <ul>
+        <li>Language</li><li>Currency</li><li>Privacy &amp; Security</li><li>Help &amp; Support</li><li onclick="logout()">Sign Out</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="content">
+    <div id="tab-explore" class="tab active">
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search products…">
+        <button>📷</button>
+      </div>
+      <div class="filters">
+        <button class="active">All</button>
+        <button>Tops</button><button>Bottoms</button><button>Accessories</button><button>Makeup</button>
+      </div>
+      <div id="productGrid" class="product-grid">Loading products…</div>
+    </div>
+
+    <div id="tab-ai" class="tab"><p>AI Stylist coming soon! ✨</p></div>
+    <div id="tab-following" class="tab"><p>You aren't following anyone yet.</p></div>
+    <div id="tab-me" class="tab">
+      <h3>My Profile</h3>
+      <p>Email: <span id="userEmail"></span></p>
+      <button onclick="logout()">Sign Out</button>
+    </div>
+  </div>
+
+  <footer>
+    <button id="btn-explore" class="active">🏡 Explore</button>
+    <button id="btn-ai">🪄 AI Stylist</button>
+    <button id="btn-following">👥 Following</button>
+    <button id="btn-me">👤 Me</button>
+  </footer>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
+    import { getFirestore, collection, query, orderBy, getDocs } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAx7DAvkZupSDXg4aXWvtfSQWhqX32Kwrs",
+      authDomain: "fleuris-3df99.firebaseapp.com",
+      projectId: "fleuris-3df99",
+      storageBucket: "fleuris-3df99.appspot.com",
+      messagingSenderId: "831344111439",
+      appId: "1:831344111439:web:placeholder"
+    };
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app), db = getFirestore(app);
+
+    onAuthStateChanged(auth, user => {
+      if (!user) return location.href = "index.html";
+      document.getElementById('userEmail').textContent = user.email;
+      loadProducts();
+    });
+
+    const tabs = ['explore', 'ai', 'following', 'me'];
+    tabs.forEach(t => document.getElementById(`btn-${t}`).addEventListener('click', () => activateTab(t)));
+
+    function activateTab(tab) {
+      tabs.forEach(t => {
+        document.getElementById(`tab-${t}`).classList.remove('active');
+        document.getElementById(`btn-${t}`).classList.remove('active');
+      });
+      document.getElementById(`tab-${tab}`).classList.add('active');
+      document.getElementById(`btn-${tab}`).classList.add('active');
+    }
+
+    window.toggleSettings = () => {
+      const m = document.getElementById('settingsModal');
+      m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
+    };
+
+    window.logout = async () => { await signOut(auth); location.href = "index.html"; }
+
+    async function loadProducts() {
+      const grid = document.getElementById('productGrid');
+      grid.textContent = 'Loading…';
+      const snapshot = await getDocs(query(collection(db, 'products'), orderBy('createdAt', 'desc')));
+      const products = snapshot.docs.map(s => s.data());
+      displayProducts(products);
+    }
+
+    function displayProducts(products) {
+      const grid = document.getElementById('productGrid');
+      grid.innerHTML = '';
+      if (products.length === 0) {
+        grid.textContent = 'No products yet.';
+        return;
+      }
+      products.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `<img src="${p.imageUrl}" alt="${p.name}"><h4>${p.name}</h4><p>$${p.price.toFixed(2)}</p>`;
+        grid.appendChild(card);
+      });
+      setupFiltering(products);
+    }
+
+    function setupFiltering(products) {
+      document.querySelectorAll('.filters button').forEach(btn => {
+        btn.onclick = () => {
+          document.querySelectorAll('.filters button').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const cat = btn.textContent === 'All' ? null : btn.textContent;
+          const filtered = cat ? products.filter(p => p.category === cat) : products;
+          const term = document.getElementById('searchInput').value.trim().toLowerCase();
+          const results = filtered.filter(p => p.name.toLowerCase().includes(term));
+          displayProducts(results);
+        };
+      });
+      document.getElementById('searchInput').oninput = () => setupFiltering(products);
+    }
+  </script>
+</body>
+</html>

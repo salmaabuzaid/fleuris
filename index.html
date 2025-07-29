@@ -1,3 +1,79 @@
+<!-- Add this to the top of your script block -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
+  import { getFirestore, setDoc, getDoc, doc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAx7DAvkZupSDXg4aXWvtfSQWhqX32Kwrs",
+    authDomain: "fleuris-3df99.firebaseapp.com",
+    projectId: "fleuris-3df99",
+    storageBucket: "fleuris-3df99.appspot.com",
+    messagingSenderId: "831344111439",
+    appId: "1:831344111439:web:placeholder"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  window.signUp = async function(role) {
+    const email = document.getElementById(`${role}SignupEmail`).value;
+    const password = document.getElementById(`${role}SignupPassword`).value;
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      // Save user role in Firestore
+      await setDoc(doc(db, "users", user.uid), {
+        email: email,
+        role: role,
+        createdAt: serverTimestamp()
+      });
+
+      alert("Signed up successfully!");
+      location.href = role === "seller" ? "seller.html" : "home.html";
+
+    } catch (error) {
+      alert(error.message);
+    }
+  }
+
+  window.login = async function(role) {
+    const email = document.getElementById(`${role}LoginEmail`).value;
+    const password = document.getElementById(`${role}LoginPassword`).value;
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      // Get role from Firestore
+      const docRef = doc(db, "users", user.uid);
+      const docSnap = await getDoc(docRef);
+      const data = docSnap.data();
+
+      if (!data || data.role !== role) {
+        alert("You're logging in with the wrong role.");
+        return;
+      }
+
+      alert("Logged in!");
+      location.href = role === "seller" ? "seller.html" : "home.html";
+
+    } catch (error) {
+      alert(error.message);
+    }
+  }
+
+  window.openModal = function(id) {
+    document.getElementById(id).style.display = 'flex';
+  }
+
+  window.closeModal = function(id) {
+    document.getElementById(id).style.display = 'none';
+  }
+</script>
 <!DOCTYPE html>
 <html lang="en">
 <head>

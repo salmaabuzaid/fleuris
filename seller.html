@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fleuris Seller</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #fefefe;
+    }
+    h1 {
+      color: #333;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 500px;
+      margin: auto;
+    }
+    input, textarea, select {
+      padding: 10px;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      padding: 10px;
+      background-color: #5DA399;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background-color: #46877b;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Upload a Product</h1>
+  <form id="product-form">
+    <input type="text" id="title" placeholder="Product Title" required />
+    <textarea id="description" placeholder="Description" required></textarea>
+    <input type="number" id="price" placeholder="Price in USD" required />
+    <select id="category" required>
+      <option value="">Select Category</option>
+      <option value="tops">Tops</option>
+      <option value="bottoms">Bottoms</option>
+      <option value="accessories">Accessories</option>
+      <option value="makeup">Makeup</option>
+    </select>
+    <input type="file" id="image" accept="image/*" required />
+    <button type="submit">Upload Product</button>
+  </form>
+
+  <script type="module">
+    // Firebase imports
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-lite.js";
+    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+
+    // Your Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyAx7DAvkZupSDXg4aXWvtfSQWhqX32Kwrs",
+      authDomain: "fleuris-3df99.firebaseapp.com",
+      projectId: "fleuris-3df99",
+      storageBucket: "fleuris-3df99.appspot.com",
+      messagingSenderId: "831344111439",
+      appId: "1:831344111439:web:YOUR_APP_ID"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const storage = getStorage(app);
+
+    const form = document.getElementById("product-form");
+
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        alert("Please log in as a seller to upload products.");
+        window.location.href = "index.html";
+      }
+    });
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const title = document.getElementById("title").value.trim();
+      const description = document.getElementById("description").value.trim();
+      const price = parseFloat(document.getElementById("price").value);
+      const category = document.getElementById("category").value;
+      const imageFile = document.getElementById("image").files[0];
+
+      if (!imageFile) {
+        alert("Please select an image.");
+        return;
+      }
+
+      try {
+        const user = auth.currentUser;
+        const imageRef = ref(storage, `products/${user.uid}/${Date.now()}_${imageFile.name}`);
+        await uploadBytes(imageRef, imageFile);
+        const imageUrl = await getDownloadURL(imageRef);
+
+        const productData = {
+          title,
+          description,
+          price,
+          category,
+          imageUrl,
+          sellerId: user.uid,
+          createdAt: serverTimestamp()
+        };
+
+        await addDoc(collection(db, "products"), productData);
+        alert("Product uploaded successfully!");
+        form.reset();
+      } catch (err) {
+        console.error("Upload failed:", err);
+        alert("Upload failed. See console for details.");
+      }
+    });
+  </script>
+</body>
+</html>

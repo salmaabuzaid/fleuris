@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fleuris | Explore</title>
+  <link rel="stylesheet" href="home.css">
+  <script defer src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js"></script>
+  <script defer src="https://kit.fontawesome.com/3e7d28ddf5.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="top-bar">
+    <div class="logo">Fleuris</div>
+    <div class="level">🌼 Blossom</div>
+    <div class="settings-icon" onclick="toggleSettings()">⚙️</div>
+  </div>
+
+  <div class="settings-modal" id="settingsModal">
+    <h3>Settings</h3>
+    <label>Language:
+      <select>
+        <option>English</option>
+        <option>French</option>
+        <option>Arabic</option>
+      </select>
+    </label>
+    <label>Currency:
+      <select>
+        <option>USD</option>
+        <option>EUR</option>
+        <option>EGP</option>
+      </select>
+    </label>
+    <button onclick="signOut()">Sign Out</button>
+    <button onclick="toggleSettings()">Close</button>
+  </div>
+
+  <div class="search-section">
+    <input type="text" placeholder="Search for products..." />
+    <button><i class="fas fa-camera"></i></button>
+  </div>
+
+  <div class="filters">
+    <button class="active">All</button>
+    <button>Tops</button>
+    <button>Bottoms</button>
+    <button>Accessories</button>
+    <button>Makeup</button>
+  </div>
+
+  <div class="tab-section" id="exploreTab">
+    <h2>Explore</h2>
+    <div class="product-grid">
+      <div class="placeholder">Products coming soon 🌸</div>
+    </div>
+  </div>
+
+  <div class="tab-section hidden" id="aiTab">
+    <h2>Flora AI Stylist</h2>
+    <p>AI features coming soon...</p>
+  </div>
+
+  <div class="tab-section hidden" id="followingTab">
+    <h2>Following</h2>
+    <p>Followed sellers and collections will appear here.</p>
+  </div>
+
+  <div class="tab-section hidden" id="meTab">
+    <h2>My Profile</h2>
+    <p>View your badges, coins, and preferences here.</p>
+  </div>
+
+  <div class="bottom-nav">
+    <button onclick="switchTab('exploreTab')" class="active"><i class="fas fa-compass"></i><br>Explore</button>
+    <button onclick="switchTab('aiTab')"><i class="fas fa-robot"></i><br>AI Stylist</button>
+    <button onclick="switchTab('followingTab')"><i class="fas fa-user-friends"></i><br>Following</button>
+    <button onclick="switchTab('meTab')"><i class="fas fa-user"></i><br>Me</button>
+  </div>
+
+  <script type="module">
+    // Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyAx7DAvkZupSDXg4aXWvtfSQWhqX32Kwrs",
+      authDomain: "fleuris-3df99.firebaseapp.com",
+      projectId: "fleuris-3df99",
+      storageBucket: "fleuris-3df99.appspot.com",
+      messagingSenderId: "831344111439",
+      appId: "1:831344111439:web:yourappid"
+    };
+
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    onAuthStateChanged(auth, user => {
+      if (!user) {
+        window.location.href = "index.html"; // redirect if not logged in
+      }
+    });
+
+    window.signOut = function () {
+      signOut(auth).then(() => {
+        window.location.href = "index.html";
+      });
+    };
+  </script>
+
+  <script>
+    function toggleSettings() {
+      document.getElementById("settingsModal").classList.toggle("show");
+    }
+
+    function switchTab(tabId) {
+      const tabs = document.querySelectorAll(".tab-section");
+      tabs.forEach(tab => tab.classList.add("hidden"));
+      document.getElementById(tabId).classList.remove("hidden");
+
+      const navButtons = document.querySelectorAll(".bottom-nav button");
+      navButtons.forEach(btn => btn.classList.remove("active"));
+      event.currentTarget.classList.add("active");
+    }
+  </script>
+</body>
+</html>

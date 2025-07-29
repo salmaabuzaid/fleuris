@@ -1,0 +1,57 @@
+<!-- home.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fleuris | Home</title>
+  <link rel="stylesheet" href="home.css" />
+</head>
+<body>
+  <header class="top-bar">
+    <div class="brand">Fleuris</div>
+    <div class="level">Level 1</div>
+    <div class="settings" onclick="openSettings()">⚙️</div>
+  </header>
+
+  <div id="settingsModal" class="modal hidden">
+    <div class="modal-content">
+      <h3>Settings</h3>
+      <ul>
+        <li>🌐 Languages</li>
+        <li>💰 Currencies</li>
+        <li>🔒 Privacy & Security</li>
+        <li>🆘 Help & Support</li>
+        <li onclick="signOut()">🚪 Sign Out</li>
+      </ul>
+      <button onclick="closeSettings()">Close</button>
+    </div>
+  </div>
+
+  <section class="search-section">
+    <input type="text" placeholder="Search with text or image..." />
+    <button>📷</button>
+  </section>
+
+  <section class="filters">
+    <button class="active">All</button>
+    <button>Tops</button>
+    <button>Bottoms</button>
+    <button>Accessories</button>
+    <button>Makeup</button>
+  </section>
+
+  <section class="product-grid">
+    <p class="placeholder">No products yet. Once sellers join, items will appear here!</p>
+  </section>
+
+  <nav class="bottom-nav">
+    <button class="active">Explore</button>
+    <button>AI Stylist</button>
+    <button>Following</button>
+    <button>Me</button>
+  </nav>
+
+  <script src="home.js"></script>
+</body>
+</html>

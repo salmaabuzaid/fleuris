@@ -81,6 +81,68 @@
   </div>
 
   <script type="module">
+
+    <!-- Tabs Content -->
+<div id="exploreTab" class="tab-content active">
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search products...">
+    <button><i class="fas fa-search"></i></button>
+  </div>
+
+  <div class="filters">
+    <button class="filter-button active" onclick="filterProducts('all')">All</button>
+    <button class="filter-button" onclick="filterProducts('tops')">Tops</button>
+    <button class="filter-button" onclick="filterProducts('bottoms')">Bottoms</button>
+    <button class="filter-button" onclick="filterProducts('accessories')">Accessories</button>
+    <button class="filter-button" onclick="filterProducts('makeup')">Makeup</button>
+  </div>
+
+  <div class="product-grid" id="productGrid">
+    <!-- Products will be dynamically shown here -->
+    <div class="product-card">
+      <img src="https://via.placeholder.com/160" alt="Product 1">
+      <div class="product-info">
+        <h3>Floral Top</h3>
+        <p>$29.99</p>
+      </div>
+    </div>
+    <div class="product-card">
+      <img src="https://via.placeholder.com/160" alt="Product 2">
+      <div class="product-info">
+        <h3>Gold Necklace</h3>
+        <p>$19.99</p>
+      </div>
+    </div>
+    <!-- Add more dummy cards as needed -->
+  </div>
+</div>
+
+<div id="aiStylistTab" class="tab-content">
+  <h2>Flora: Your AI Stylist 🌸</h2>
+  <p>Coming soon... chat with Flora for outfit advice, style tips, and lookbook magic!</p>
+</div>
+
+<div id="followingTab" class="tab-content">
+  <h2>Following</h2>
+  <p>You’re not following anyone yet. Follow sellers to see their latest drops here!</p>
+</div>
+
+<div id="meTab" class="tab-content">
+  <h2>My Profile</h2>
+  <p>View your orders, coins, rewards, wishlist, and profile info here.</p>
+</div>
+
+<!-- AI Assistant Button -->
+<button id="aiButton" title="Ask Flora">🌼</button>
+
+<!-- Bottom Navigation -->
+<div class="bottom-nav">
+  <button onclick="showTab('exploreTab', this)" class="active"><i class="fas fa-store"></i><span>Explore</span></button>
+  <button onclick="showTab('aiStylistTab', this)"><i class="fas fa-magic"></i><span>AI Stylist</span></button>
+  <button onclick="showTab('followingTab', this)"><i class="fas fa-heart"></i><span>Following</span></button>
+  <button onclick="showTab('meTab', this)"><i class="fas fa-user"></i><span>Me</span></button>
+</div>
+    
     // Firebase config
     const firebaseConfig = {
       apiKey: "AIzaSyAx7DAvkZupSDXg4aXWvtfSQWhqX32Kwrs",
@@ -124,6 +186,52 @@
       navButtons.forEach(btn => btn.classList.remove("active"));
       event.currentTarget.classList.add("active");
     }
+    <script>
+  function showTab(tabId, buttonElement) {
+    // Hide all tabs
+    document.querySelectorAll('.tab-content').forEach(tab => {
+      tab.classList.remove('active');
+    });
+
+    // Show selected tab
+    document.getElementById(tabId).classList.add('active');
+
+    // Remove active state from all nav buttons
+    document.querySelectorAll('.bottom-nav button').forEach(btn => {
+      btn.classList.remove('active');
+    });
+
+    // Add active state to clicked button
+    buttonElement.classList.add('active');
+  }
+
+  // Toggle settings modal
+  document.getElementById('settingsBtn')?.addEventListener('click', () => {
+    const modal = document.getElementById('settingsModal');
+    modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
+  });
+
+  // Filter buttons
+  function filterProducts(category) {
+    document.querySelectorAll('.filter-button').forEach(btn => {
+      btn.classList.remove('active');
+    });
+    event.target.classList.add('active');
+
+    // TODO: Add real filtering later based on Firestore product categories
+  }
+
+  // Sign out button (Firebase)
+  document.getElementById('signOutBtn')?.addEventListener('click', () => {
+    firebase.auth().signOut().then(() => {
+      window.location.href = "index.html";
+    });
+  });
+
+  // AI Button (just a placeholder for now)
+  document.getElementById('aiButton')?.addEventListener('click', () => {
+    alert("Flora will help you soon 🌸");
+  });
   </script>
 </body>
 </html>

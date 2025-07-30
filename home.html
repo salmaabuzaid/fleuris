@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fleuris | Home</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter&display=swap">
+</head>
+<body>
+  <!-- Header -->
+  <header class="main-header">
+    <div class="logo">Fleuris</div>
+    <nav>
+      <a href="#" onclick="loadFeed()">Feed</a>
+      <a href="#" onclick="toggleFlora()">Flora AI</a>
+      <a href="#" onclick="loadLookbooks()">Lookbooks</a>
+      <a href="#" id="settings-btn">Settings</a>
+      <button id="logout-btn">Logout</button>
+    </nav>
+  </header>
+
+  <!-- Profile Summary -->
+  <section class="profile-summary">
+    <h2>Welcome Back!</h2>
+    <p>Level: <span id="userLevel"></span> | Coins: <span id="userCoins"></span></p>
+    <div id="badgesContainer" class="badge-bar"></div>
+  </section>
+
+  <!-- Personal Feed -->
+  <section>
+    <h2>For You</h2>
+    <div id="personalFeed" class="product-grid"></div>
+  </section>
+
+  <!-- Lookbooks -->
+  <section>
+    <div class="section-header">
+      <h2>Your Lookbooks</h2>
+      <button onclick="createLookbook()">+ New</button>
+    </div>
+    <div id="lookbookList" class="lookbook-grid"></div>
+  </section>
+
+  <!-- Flora AI Modal -->
+  <div id="floraModal" class="modal hidden">
+    <div class="modal-content">
+      <span onclick="toggleFlora()" class="close">&times;</span>
+      <h3>Ask Flora</h3>
+      <input type="text" id="floraInput" placeholder="Describe your desired style" />
+      <input type="file" id="floraImage" />
+      <button onclick="floraAsk()">Search</button>
+      <div id="floraResponses" class="product-grid"></div>
+    </div>
+  </div>
+
+  <!-- Seller Profile Modal -->
+  <div id="sellerProfile" class="modal hidden">
+    <div class="modal-content">
+      <span class="close" onclick="document.getElementById('sellerProfile').classList.add('hidden')">&times;</span>
+      <h3 id="sellerName"></h3>
+      <button id="followBtn" onclick="toggleFollow()">Follow</button>
+      <div id="sellerFeed" class="product-grid"></div>
+    </div>
+  </div>
+
+  <!-- Settings Modal -->
+  <div id="settings-modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close" id="close-settings">&times;</span>
+      <h3>Settings</h3>
+      <label>Upload Styled Photo</label>
+      <input type="file" id="imgSearchFile" />
+      <button onclick="imageSearch()">Find Matches</button>
+      <div id="imgSearchResults" class="product-grid"></div>
+    </div>
+  </div>
+
+  <script type="module" src="home.js"></script>
+</body>
+</html>

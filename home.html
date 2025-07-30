@@ -150,6 +150,10 @@
   <button id="followBtn" onclick="toggleFollow()">Follow</button>
   <div id="sellerFeed" class="product-grid"></div>
 </div>
+
+      <div id="personalFeed" class="product-grid">
+  <!-- Recommendations will show here -->
+</div>
       
 <div id="meTab" class="tab-content">
   <h2>My Profile</h2>
@@ -160,6 +164,12 @@
   <p>Level: <span id="userLevel"></span></p>
   <p>Coins: <span id="userCoins"></span></p>
   <div id="badgesContainer"></div>
+</div>
+
+      <div id="myLookbooks">
+  <h3>My Lookbooks</h3>
+  <button onclick="createLookbook()">+ New Lookbook</button>
+  <div id="lookbookList" class="product-grid"></div>
 </div>
       
 <!-- AI Assistant Button -->

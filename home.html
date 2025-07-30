@@ -97,6 +97,13 @@
     <button class="filter-button" onclick="filterProducts('makeup')">Makeup</button>
   </div>
 
+      <div id="imageSearch">
+  <h3>Upload a photo to search like items</h3>
+  <input type="file" accept="image/*" id="imgSearchFile">
+  <button onclick="imageSearch()">Search</button>
+  <div id="imgSearchResults" class="product-grid"></div>
+</div>
+      
   <div class="product-grid" id="productGrid">
     <!-- Products will be dynamically shown here -->
     <div class="product-card">
@@ -122,18 +129,42 @@
   <p>Coming soon... chat with Flora for outfit advice, style tips, and lookbook magic!</p>
 </div>
 
+      <div id="floraModal" class="modal hidden">
+  <div class="modal-content">
+    <span class="close" onclick="toggleFlora()">&times;</span>
+    <h2>Flora 🌸 – Ask me anything</h2>
+    <textarea id="floraInput" placeholder="Describe your style…" rows="3"></textarea>
+    <input type="file" accept="image/*" id="floraImage">
+    <button onclick="floraAsk()">Send</button>
+    <div id="floraResponses"></div>
+  </div>
+</div>
+
 <div id="followingTab" class="tab-content">
   <h2>Following</h2>
   <p>You’re not following anyone yet. Follow sellers to see their latest drops here!</p>
 </div>
 
+      <div id="sellerProfile" class="hidden">
+  <h3 id="sellerName">Seller Name</h3>
+  <button id="followBtn" onclick="toggleFollow()">Follow</button>
+  <div id="sellerFeed" class="product-grid"></div>
+</div>
+      
 <div id="meTab" class="tab-content">
   <h2>My Profile</h2>
   <p>View your orders, coins, rewards, wishlist, and profile info here.</p>
 </div>
 
+      <div id="myProfile">
+  <p>Level: <span id="userLevel"></span></p>
+  <p>Coins: <span id="userCoins"></span></p>
+  <div id="badgesContainer"></div>
+</div>
+      
 <!-- AI Assistant Button -->
 <button id="aiButton" title="Ask Flora">🌼</button>
+      <button id="aiButton" title="Ask Flora" onclick="toggleFlora()">🌼</button>
 
 <!-- Bottom Navigation -->
 <div class="bottom-nav">

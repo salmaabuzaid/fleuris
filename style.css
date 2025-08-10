@@ -1,0 +1,78 @@
+/* Reset & basics */
+body {
+  margin: 0; padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f0f9f5;
+  color: #1c1c3d;
+}
+
+h1, h2, h3 {
+  font-weight: 700;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+.landing-container {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.auth-buttons button {
+  background: #91b89a;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  margin: 10px 8px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.auth-buttons button:hover {
+  background: #719e76;
+}
+
+.auth-form {
+  background: white;
+  max-width: 350px;
+  margin: 20px auto;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px #a0bba0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.auth-form input {
+  padding: 12px 10px;
+  border: 1px solid #c2c2c2;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+.auth-form button {
+  background: #5a704c;
+  color: white;
+  border: none;
+  padding: 12px 15px;
+  border-radius: 40px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.auth-form button:hover {
+  background: #4a5a3b;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Add other style sections for home.html when ready */

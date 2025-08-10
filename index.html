@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fleuris - Your Garden of Unique Brands</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    /* Reset & base */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #F8F9FA;
+      color: #3A3A3A;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    /* Container */
+    .container {
+      max-width: 900px;
+      width: 100%;
+      text-align: center;
+      margin-top: 60px;
+      padding: 0 15px;
+    }
+
+    /* Hero */
+    h1 {
+      font-weight: 600;
+      font-size: 3rem;
+      color: #C2A04F; /* Desert Gold */
+      margin-bottom: 15px;
+      line-height: 1.1;
+    }
+
+    h2.subheadline {
+      font-weight: 400;
+      font-size: 1.3rem;
+      color: #5A704C; /* Olive Green */
+      margin-bottom: 40px;
+    }
+
+    /* CTA button */
+    .cta-btn {
+      background: #5A704C;
+      color: #FAFAF6;
+      padding: 15px 35px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      box-shadow: 0 5px 15px rgba(90,112,76,0.4);
+    }
+    .cta-btn:hover {
+      background: #49603c;
+      box-shadow: 0 7px 20px rgba(73,96,60,0.6);
+    }
+
+    /* Benefits section */
+    .benefits {
+      display: flex;
+      justify-content: space-around;
+      margin: 60px 0 100px;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .benefit-item {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      padding: 25px;
+      width: 260px;
+      transition: transform 0.3s ease;
+      cursor: default;
+    }
+    .benefit-item:hover {
+      transform: translateY(-6px);
+    }
+
+    .benefit-icon {
+      font-size: 40px;
+      color: #C2A04F;
+      margin-bottom: 18px;
+    }
+
+    .benefit-title {
+      font-weight: 600;
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      color: #1C1C3D; /* Deep Navy */
+    }
+
+    .benefit-text {
+      font-weight: 400;
+      font-size: 1rem;
+      color: #555;
+      line-height: 1.4;
+    }
+
+    /* Signup section */
+    .signup-section {
+      max-width: 500px;
+      margin-bottom: 40px;
+    }
+
+    .signup-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .signup-buttons button {
+      padding: 14px 28px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      border-radius: 25px;
+      border: none;
+      cursor: pointer;
+      background: #C2A04F;
+      color: #FAFAF6;
+      box-shadow: 0 5px 15px rgba(194,160,79,0.5);
+      transition: background 0.3s ease;
+      min-width: 140px;
+    }
+    .signup-buttons button:hover {
+      background: #a3863c;
+      box-shadow: 0 7px 20px rgba(163,134,60,0.7);
+    }
+
+    /* Modal styles */
+    .modal {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 10000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .modal.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal-content {
+      background: white;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 420px;
+      padding: 30px 25px 35px;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+    .modal-close {
+      position: absolute;
+      top: 18px;
+      right: 20px;
+      font-size: 28px;
+      font-weight: 700;
+      cursor: pointer;
+      color: #999;
+      transition: color 0.2s ease;
+    }
+    .modal-close:hover {
+      color: #333;
+    }
+    .modal h3 {
+      margin-bottom: 25px;
+      font-weight: 600;
+      color: #1C1C3D;
+    }
+    .modal form input {
+      width: 100%;
+      padding: 12px 15px;
+      margin-bottom: 18px;
+      border: 1.8px solid #C2A04F;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: 'Poppins', sans-serif;
+      outline-offset: 2px;
+      transition: border-color 0.3s ease;
+    }
+    .modal form input:focus {
+      border-color: #5A704C;
+    }
+    .modal form button {
+      background: #5A704C;
+      color: #FAFAF6;
+      padding: 12px 0;
+      font-weight: 700;
+      font-size: 1.1rem;
+      width: 100%;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .modal form button:hover {
+      background: #49603c;
+    }
+
+    /* Responsive */
+    @media (max-width: 700px) {
+      h1 {
+        font-size: 2.4rem;
+      }
+      .benefits {
+        flex-direction: column;
+        gap: 20px;
+      }
+      .benefit-item {
+        width: 100%;
+      }
+      .signup-buttons {
+        flex-direction: column;
+        gap: 16px;
+      }
+      .signup-buttons button {
+        min-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Hero -->
+    <h1>Welcome to Fleuris</h1>
+    <h2 class="subheadline">Your Garden of Unique Brands</h2>
+    <p style="font-size:1.15rem; color:#555; max-width:600px; margin:auto; margin-bottom:40px;">
+      Discover exclusive fashion and accessories from emerging Egyptian designers. Shop, style, and stand out with unique pieces you won’t find anywhere else.
+    </p>
+    <button class="cta-btn" id="btnGetStarted">Join Now — It’s Free!</button>
+
+    <!-- Benefits -->
+    <div class="benefits">
+      <div class="benefit-item">
+        <div class="benefit-icon">🌿</div>
+        <div class="benefit-title">Curated for You</div>
+        <div class="benefit-text">Unique, quality local brands handpicked just for you.</div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">🤝</div>
+        <div class="benefit-title">Support Creators</div>
+        <div class="benefit-text">Empower Egyptian fashion entrepreneurs and makers.</div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">🚚</div>
+        <div class="benefit-title">Easy & Safe Shopping</div>
+        <div class="benefit-text">Cash on Delivery and buyer protection for peace of mind.</div>
+      </div>
+    </div>
+
+    <!-- Signup options -->
+    <div class="signup-section">
+      <h3>Get started as</h3>
+      <div class="signup-buttons">
+        <button id="btnBuyer">Buyer</button>
+        <button id="btnSeller">Seller</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Buyer Signup/Login Modal -->
+  <div id="modalBuyer" class="modal">
+    <div class="modal-content">
+      <span class="modal-close" data-close="modalBuyer">&times;</span>
+      <h3>Buyer Signup / Login</h3>
+      <form id="formBuyerAuth">
+        <input type="email" id="buyerEmail" placeholder="Email" required />
+        <input type="password" id="buyerPassword" placeholder="Password" required minlength="6" />
+        <button type="submit" id="buyerSubmitBtn">Sign Up / Login</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Seller Signup/Login Modal -->
+  <div id="modalSeller" class="modal">
+    <div class="modal-content">
+      <span class="modal-close" data-close="modalSeller">&times;</span>
+      <h3>Seller Signup / Login</h3>
+      <form id="formSellerAuth">
+        <input type="email" id="sellerEmail" placeholder="Email" required />
+        <input type="password" id="sellerPassword" placeholder="Password" required minlength="6" />
+        <button type="submit" id="sellerSubmitBtn">Sign Up / Login</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+
+  <script>
+    // Firebase config (replace with your own)
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_AUTH_DOMAIN",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_STORAGE_BUCKET",
+      messagingSenderId: "YOUR_MSG_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    // Modal helpers
+    const modalBuyer = document.getElementById("modalBuyer");
+    const modalSeller = document.getElementById("modalSeller");
+
+    const btnBuyer = document.getElementById("btnBuyer");
+    const btnSeller = document.getElementById("btnSeller");
+    const btnGetStarted = document.getElementById("btnGetStarted");
+
+    // Show modals
+    btnBuyer.onclick = () => openModal(modalBuyer);
+    btnSeller.onclick = () => openModal(modalSeller);
+    btnGetStarted.onclick = () => openModal(modalBuyer);
+
+    // Close modals
+    document.querySelectorAll(".modal-close").forEach(el => {
+      el.onclick = () => closeModal(document.getElementById(el.dataset.close));
+    });
+    window.onclick = e => {
+      if (e.target.classList.contains("modal")) {
+        closeModal(e.target);
+      }
+    };
+
+    function openModal(modal) {
+      modal.classList.add("show");
+    }
+    function closeModal(modal) {
+      modal.classList.remove("show");
+    }
+
+    // Signup/Login Buyer form
+    const formBuyerAuth = document.getElementById("formBuyerAuth");
+    formBuyerAuth.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("buyerEmail").value.trim();
+      const password = document.getElementById("buyerPassword").value.trim();
+
+      try {
+        let userCredential;
+        // Try sign in
+        userCredential = await auth.signInWithEmailAndPassword(email, password);
+        // If success, redirect buyer home
+        window.location.href = "home.html";
+      } catch (error) {
+        // If no user, create one
+        if (error.code === "auth/user-not-found") {
+          try {
+            const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+            // Save user role buyer
+            await db.collection("users").doc(userCredential.user.uid).set({ role: "buyer" });
+            window.location.href = "home.html";
+          } catch (err) {
+            alert("Signup error: " + err.message);
+          }
+        } else {
+          alert("Login error: " + error.message);
+        }
+      }
+    });
+
+    // Signup/Login Seller form
+    const formSellerAuth = document.getElementById("formSellerAuth");
+    formSellerAuth.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("sellerEmail").value.trim();
+      const password = document.getElementById("sellerPassword").value.trim();
+
+      try {
+        let userCredential;
+        // Try sign in
+        userCredential = await auth.signInWithEmailAndPassword(email, password);
+        // Check role is seller
+        const userDoc = await db.collection("users").doc(userCredential.user.uid).get();
+        if (userDoc.exists && userDoc.data().role === "seller") {
+          window.location.href = "seller.html";
+        } else {
+          alert("This account is not registered as a seller.");
+          await auth.signOut();
+        }
+      } catch (error) {
+        // If no user, create one
+        if (error.code === "auth/user-not-found") {
+          try {
+            const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+            // Save user role seller
+            await db.collection("users").doc(userCredential.user.uid).set({ role: "seller" });
+            window.location.href = "seller.html";
+          } catch (err) {
+            alert("Signup error: " + err.message);
+          }
+        } else {
+          alert("Login error: " + error.message);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

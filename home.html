@@ -96,6 +96,52 @@
     </section>
   </main>
 
+  <!-- Checkout Modal -->
+<div id="checkoutModal" class="modal hidden">
+  <div class="modal-content">
+    <span id="closeCheckout" class="close">&times;</span>
+    <h2>Checkout - Cash on Delivery</h2>
+    <form id="checkoutForm">
+      <input type="text" id="buyerName" placeholder="Full Name" required />
+      <input type="tel" id="buyerPhone" placeholder="Phone Number" required />
+      <textarea id="buyerAddress" placeholder="Delivery Address" required></textarea>
+      <p>Product: <span id="checkoutProductName"></span></p>
+      <p>Price: EGP <span id="checkoutProductPrice"></span></p>
+      <button type="submit">Place Order</button>
+    </form>
+  </div>
+</div>
+
+<style>
+  /* Simple modal styles */
+  .modal {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 9999;
+  }
+  .modal.hidden { display: none; }
+  .modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 400px;
+  }
+  .close {
+    float: right;
+    font-size: 28px;
+    cursor: pointer;
+  }
+  #checkoutForm input, #checkoutForm textarea, #checkoutForm button {
+    width: 100%;
+    margin: 10px 0;
+    padding: 8px;
+    font-size: 16px;
+  }
+</style>
+  
   <script src="app.js"></script>
 </body>
 </html>

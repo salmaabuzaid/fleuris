@@ -137,10 +137,88 @@ function renderProducts(prods) {
       <img src="${product.imageUrl || "https://via.placeholder.com/150"}" alt="${product.name}" />
       <div class="product-title">${product.name}</div>
       <div class="product-price">EGP ${product.price}</div>
+      <button class="orderBtn" data-id="${product.id}" data-name="${product.name}" data-price="${product.price}">
+        Order Now
+      </button>
     `;
     productGrid.appendChild(card);
   });
+
+  // Add click listeners for order buttons
+  document.querySelectorAll(".orderBtn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      openCheckoutModal(btn.dataset);
+    });
+  });
 }
+
+// Elements for modal
+const checkoutModal = document.getElementById("checkoutModal");
+const closeCheckout = document.getElementById("closeCheckout");
+const checkoutForm = document.getElementById("checkoutForm");
+const checkoutProductName = document.getElementById("checkoutProductName");
+const checkoutProductPrice = document.getElementById("checkoutProductPrice");
+
+let selectedProduct = null;
+
+function openCheckoutModal(productData) {
+  selectedProduct = productData;
+  checkoutProductName.textContent = productData.name;
+  checkoutProductPrice.textContent = productData.price;
+  checkoutModal.classList.remove("hidden");
+}
+
+// Close modal event
+closeCheckout.onclick = () => {
+  checkoutModal.classList.add("hidden");
+  checkoutForm.reset();
+};
+
+// Handle form submit - create order in Firestore
+checkoutForm.onsubmit = async (e) => {
+  e.preventDefault();
+  if (!currentUser) {
+    alert("You must be logged in to place an order.");
+    checkoutModal.classList.add("hidden");
+    return;
+  }
+
+  const name = document.getElementById("buyerName").value.trim();
+  const phone = document.getElementById("buyerPhone").value.trim();
+  const address = document.getElementById("buyerAddress").value.trim();
+
+  if (!name || !phone || !address) {
+    alert("Please fill all fields.");
+    return;
+  }
+
+  try {
+    // Fetch sellerId of product
+    const productDoc = await db.collection("products").doc(selectedProduct.id).get();
+    if (!productDoc.exists) throw new Error("Product not found");
+    const sellerId = productDoc.data().sellerId;
+
+    await db.collection("orders").add({
+      buyerId: currentUser.uid,
+      buyerEmail: currentUser.email || "",
+      buyerName: name,
+      buyerPhone: phone,
+      buyerAddress: address,
+      productIds: [selectedProduct.id],
+      productNames: [selectedProduct.name],
+      totalPrice: Number(selectedProduct.price),
+      sellerId,
+      status: "Pending",
+      createdAt: new Date(),
+    });
+
+    alert("Order placed successfully! You will pay on delivery.");
+    checkoutModal.classList.add("hidden");
+    checkoutForm.reset();
+  } catch (error) {
+    alert("Failed to place order: " + error.message);
+  }
+};
 
 // Filters & search
 filters.forEach((btn) => {

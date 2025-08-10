@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fleuris Seller Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-storage-compat.js"></script>
+</head>
+<body>
+  <header class="top-bar">
+    <h1>Fleuris Seller Dashboard</h1>
+    <button id="btnLogout">Logout</button>
+  </header>
+
+  <main>
+    <section>
+      <h2>Add New Product</h2>
+      <input type="text" id="productName" placeholder="Product Name" />
+      <input type="number" id="productPrice" placeholder="Price (EGP)" />
+      <select id="productCategory">
+        <option value="tops">Tops</option>
+        <option value="bottoms">Bottoms</option>
+        <option value="accessories">Accessories</option>
+        <option value="makeup">Makeup</option>
+      </select>
+      <label>
+        <input type="checkbox" id="productEco" /> Eco-friendly
+      </label>
+      <input type="file" id="productImage" />
+      <button id="btnAddProduct">Add Product</button>
+    </section>
+
+    <section>
+      <h2>Manage Auctions</h2>
+      <div id="auctionListSeller"></div>
+      <h3>Create Auction</h3>
+      <input type="text" id="auctionProductName" placeholder="Product Name" />
+      <input type="number" id="auctionStartBid" placeholder="Start Bid (EGP)" />
+      <input type="datetime-local" id="auctionEndTime" />
+      <button id="btnCreateAuction">Create Auction</button>
+    </section>
+
+    <section>
+      <h2>Manage Bundles</h2>
+      <div id="bundleListSeller"></div>
+      <h3>Create Bundle</h3>
+      <input type="text" id="bundleTitle" placeholder="Bundle Title" />
+      <input type="text" id="bundleProducts" placeholder="Product Names (comma-separated)" />
+      <input type="number" id="bundleDiscount" placeholder="Discount % (e.g. 10)" />
+      <input type="number" id="bundlePrice" placeholder="Price After Discount (EGP)" />
+      <button id="btnCreateBundle">Create Bundle</button>
+    </section>
+
+    <section>
+      <h2>Manage Lookbooks & Story Videos</h2>
+      <div id="lookbookListSeller"></div>
+      <h3>Create Lookbook/Story</h3>
+      <input type="text" id="lookbookTitle" placeholder="Lookbook Title" />
+      <input type="file" id="lookbookCover" accept="image/*" />
+      <input type="file" id="lookbookVideo" accept="video/*" />
+      <button id="btnCreateLookbook">Create Lookbook</button>
+    </section>
+
+    <section>
+      <h2>Orders (Cash On Delivery)</h2>
+      <div id="ordersListSeller"></div>
+    </section>
+  </main>
+
+  <script src="seller.js"></script>
+</body>
+</html>

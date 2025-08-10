@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Fleuris - Your Garden of Unique Brands</title>
+<link rel="stylesheet" href="style.css" />
+<meta name="theme-color" content="#A8D5BA" />
+</head>
+<body>
+  <main class="landing-container">
+    <header>
+      <h1 class="brand-name">Fleuris</h1>
+      <p class="tagline">Your Garden of Unique Brands</p>
+    </header>
+
+    <section class="intro">
+      <h2>What is Fleuris?</h2>
+      <p>Fleuris is a unique marketplace designed especially for girls and women in Egypt who love fashion, beauty, and accessories that stand out. We bring together local designers and micro-brands in one beautiful place so you can discover and shop styles you won’t find anywhere else.</p>
+    </section>
+
+    <section class="difference">
+      <h2>Why Choose Fleuris?</h2>
+      <ul>
+        <li><strong>Exclusive Collections:</strong> Carefully curated products from local designers and emerging brands.</li>
+        <li><strong>Cash on Delivery:</strong> Shop worry-free with Egypt-friendly payment options.</li>
+        <li><strong>Community & Rewards:</strong> Connect with sellers, earn badges, and get special discounts.</li>
+        <li><strong>Style Help:</strong> Use our AI Stylist to find outfits that suit you perfectly (coming soon!).</li>
+        <li><strong>Easy and Safe:</strong> Buyer and seller protection with a simple, mobile-friendly experience.</li>
+      </ul>
+    </section>
+
+    <section class="benefits">
+      <h2>Who is Fleuris For?</h2>
+      <p><strong>Buyers:</strong> If you love unique fashion and want a trusted, stylish place to shop locally.</p>
+      <p><strong>Sellers:</strong> If you’re a designer or small brand wanting to reach new customers with zero hassle.</p>
+    </section>
+
+    <section class="auth-section">
+      <div class="auth-buttons">
+        <button id="btnSignupBuyer" class="btn-primary">Sign Up as Buyer</button>
+        <button id="btnSignupSeller" class="btn-secondary">Sign Up as Seller</button>
+      </div>
+      <p>Already have an account? <button id="btnLogin" class="link-btn">Log In</button></p>
+    </section>
+
+    <!-- Signup Modal -->
+    <dialog id="signupModal">
+      <form method="dialog" id="signupForm">
+        <h3>Create Your Account</h3>
+        <label>
+          Full Name
+          <input type="text" id="signupName" required />
+        </label>
+        <label>
+          Email
+          <input type="email" id="signupEmail" required />
+        </label>
+        <label>
+          Password
+          <input type="password" id="signupPassword" required minlength="6" />
+        </label>
+        <input type="hidden" id="signupRole" value="buyer" />
+        <button type="submit" class="btn-primary">Sign Up</button>
+        <button type="button" id="btnCloseSignup" class="btn-secondary">Cancel</button>
+      </form>
+    </dialog>
+
+    <!-- Login Modal -->
+    <dialog id="loginModal">
+      <form method="dialog" id="loginForm">
+        <h3>Log In to Fleuris</h3>
+        <label>
+          Email
+          <input type="email" id="loginEmail" required />
+        </label>
+        <label>
+          Password
+          <input type="password" id="loginPassword" required />
+        </label>
+        <button type="submit" class="btn-primary">Log In</button>
+        <button type="button" id="btnCloseLogin" class="btn-secondary">Cancel</button>
+      </form>
+    </dialog>
+  </main>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

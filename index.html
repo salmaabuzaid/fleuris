@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fleuris - Welcome</title>
+  <style>
+    /* Pastel green theme + minimal clean styling */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #E6F2EA;
+      margin: 0; padding: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      height: 100vh;
+      color: #2A4D3B;
+    }
+    h1 {
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+    .container {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      width: 320px;
+      text-align: center;
+    }
+    input[type="email"], input[type="password"], input[type="text"], select {
+      width: 100%;
+      padding: 10px;
+      margin: 0.5rem 0 1rem;
+      border-radius: 6px;
+      border: 1px solid #B8D3C7;
+      font-size: 1rem;
+    }
+    button {
+      width: 100%;
+      background-color: #5AA582;
+      border: none;
+      padding: 12px;
+      color: white;
+      font-size: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+    button:hover {
+      background-color: #488164;
+    }
+    .toggle {
+      color: #5AA582;
+      cursor: pointer;
+      text-decoration: underline;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+    .error {
+      color: #c53030;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="auth-container">
+    <h1>Fleuris</h1>
+    <div id="signup-form">
+      <input type="text" id="signup-name" placeholder="Full Name" required />
+      <input type="email" id="signup-email" placeholder="Email" required />
+      <input type="password" id="signup-password" placeholder="Password" required />
+      <select id="signup-role" required>
+        <option value="" disabled selected>Select Role</option>
+        <option value="buyer">Buyer</option>
+        <option value="seller">Seller</option>
+      </select>
+      <button id="signup-btn">Sign Up</button>
+      <div class="toggle" id="to-login">Already have an account? Log in</div>
+      <div class="error" id="signup-error"></div>
+    </div>
+
+    <div id="login-form" style="display:none;">
+      <input type="email" id="login-email" placeholder="Email" required />
+      <input type="password" id="login-password" placeholder="Password" required />
+      <button id="login-btn">Log In</button>
+      <div class="toggle" id="to-signup">Don't have an account? Sign up</div>
+      <div class="error" id="login-error"></div>
+    </div>
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"></script>
+
+  <script>
+    // Firebase config - replace YOUR_APP_ID with your actual Firebase appId if needed
+    const firebaseConfig = {
+      apiKey: "AIzaSyAx7DAvkZupSDXg4aXWvtfSQWhqX32Kwrs",
+      authDomain: "fleuris-3df99.firebaseapp.com",
+      projectId: "fleuris-3df99",
+      storageBucket: "fleuris-3df99.appspot.com",
+      messagingSenderId: "831344111439",
+      appId: "1:831344111439:web:YOUR_APP_ID"
+    };
+
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    // Elements
+    const signupForm = document.getElementById('signup-form');
+    const loginForm = document.getElementById('login-form');
+    const toLogin = document.getElementById('to-login');
+    const toSignup = document.getElementById('to-signup');
+    const signupError = document.getElementById('signup-error');
+    const loginError = document.getElementById('login-error');
+
+    // Toggle forms
+    toLogin.onclick = () => {
+      signupForm.style.display = 'none';
+      loginForm.style.display = 'block';
+      signupError.textContent = '';
+      loginError.textContent = '';
+    };
+    toSignup.onclick = () => {
+      loginForm.style.display = 'none';
+      signupForm.style.display = 'block';
+      signupError.textContent = '';
+      loginError.textContent = '';
+    };
+
+    // Sign up
+    document.getElementById('signup-btn').addEventListener('click', async () => {
+      signupError.textContent = '';
+      const name = document.getElementById('signup-name').value.trim();
+      const email = document.getElementById('signup-email').value.trim();
+      const password = document.getElementById('signup-password').value;
+      const role = document.getElementById('signup-role').value;
+
+      if (!name || !email || !password || !role) {
+        signupError.textContent = 'Please fill all fields.';
+        return;
+      }
+
+      try {
+        const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+        const user = userCredential.user;
+
+        // Add user document in Firestore
+        await db.collection('users').doc(user.uid).set({
+          name,
+          email,
+          role,
+          coins: 0,
+          level: 1,
+          badges: [],
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        alert('Signup successful! Redirecting...');
+        window.location.href = 'home.html';
+      } catch (error) {
+        signupError.textContent = error.message;
+      }
+    });
+
+    // Login
+    document.getElementById('login-btn').addEventListener('click', async () => {
+      loginError.textContent = '';
+      const email = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value;
+
+      if (!email || !password) {
+        loginError.textContent = 'Please enter email and password.';
+        return;
+      }
+
+      try {
+        await auth.signInWithEmailAndPassword(email, password);
+        alert('Login successful! Redirecting...');
+        window.location.href = 'home.html';
+      } catch (error) {
+        loginError.textContent = error.message;
+      }
+    });
+
+  </script>
+
+</body>
+</html>
